@@ -1,0 +1,15 @@
+# packages
+node_modules/
+
+# dist
+dist/
+
+# temp
+.temp/
+.rn_temp/
+
+# mac os
+.DS_Store
+
+# cache
+.eslintcache

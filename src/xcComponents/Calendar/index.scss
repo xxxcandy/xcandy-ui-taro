@@ -1,0 +1,104 @@
+.xc-calendar {
+  padding: 20px 0;
+
+  background: #fff;
+  &__title {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    font-size: 28px;
+    font-weight: bold;
+    line-height: 1.4;
+  }
+  &__month-siwtch-btn {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    width: 68px;
+    height: 42px;
+    margin: 0 (100%/7/2);
+    border-radius: 4px;
+
+    background-color: #0056ff;
+    &--disabled {
+      opacity: 0;
+    }
+  }
+  &__content {
+    margin-top: 30px;
+  }
+  &__week, &__dates {
+    overflow: hidden;
+
+    margin-top: 20px;
+
+    font-size: 24px;
+    line-height: 30px;
+  }
+  &__week {
+    font-weight: bold;
+    &__day {
+      display: flex;
+      float: left;
+
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      box-sizing: border-box;
+      width: (100% / 7);
+      height: 30px;
+    }
+  }
+  &__date {
+    display: flex;
+    position: relative;
+    z-index: 1;
+    float: left;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    box-sizing: border-box;
+    width: (100% / 7);
+    height: 80px;
+    padding: 15px 0;
+
+    cursor: pointer;
+    &__note {
+      font-size: 22px;
+    }
+    &--disable {
+      opacity: .3;
+
+      cursor: not-allowed;
+    }
+    &--other-month {
+      opacity: .1;
+
+      cursor: not-allowed;
+    }
+    &--selected {
+      color: #fff;
+    }
+    &__bg--selected {
+      position: absolute;
+      z-index: -1;
+      top: 50%;
+      left: 50%;
+
+      width: 68px;
+      height: 70px;
+      border-radius: 50%;
+
+      background-color: #0056ff;
+
+      transform: translate(-50%, -50%);
+    }
+  }
+}
