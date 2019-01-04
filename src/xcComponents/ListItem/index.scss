@@ -1,0 +1,56 @@
+.xc-list-item {
+  display: flex;
+
+  align-content: center;
+  &__wrap {
+    display: flex;
+    position: relative;
+
+    flex: 1 0 0;
+  }
+  &__content {
+    display: flex;
+    overflow: hidden;
+
+    flex: 1 0 0;
+    align-items: center;
+  }
+  &__action {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    margin-right: 20px;
+  }
+  &__border {
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 0;
+
+    width: 100%;
+    border-top: 1px solid #eee;
+
+    pointer-events: none;
+  }
+  &__arrow {
+    position: relative;
+
+    width: 20px;
+    height: 20px;
+    &::after {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      width: 16px;
+      height: 16px;
+      border-top: 4px solid #888;
+      border-right: 4px solid #888;
+
+      content: '';
+    }
+  }
+}

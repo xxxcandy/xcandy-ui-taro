@@ -1,7 +1,12 @@
-.page {
-  padding: 40px 40px 60px;
+page, .page {
+  overflow: hidden;
+
+  min-height: 100vh;
+  padding: 0 20px 80px;
 
   background: #f6f6f6;
 
   font-size: 28px;
+  font-weight: 300;
+  line-height: 1.4;
 }

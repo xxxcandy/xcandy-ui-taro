@@ -11,6 +11,8 @@ class App extends Component {
   config: Config = {
     pages: [
       'pages/index/index',
+      'pages/layout/list/index',
+      'pages/action/popup/index',
       'pages/calendar/index'
     ],
     window: {

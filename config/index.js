@@ -25,7 +25,9 @@ const config = {
     options: {}
   },
   alias: {
-    '@components': path.resolve(__dirname, '..', 'src/components')
+    '@components': path.resolve(__dirname, '..', 'src/components'),
+    '@xcComponents': path.resolve(__dirname, '..', 'src/xcComponents')
+
   },
   weapp: {
     module: {
@@ -85,7 +87,7 @@ if (process.env.TARO_BUILD_TYPE === 'ui') {
     enableExtract: false,
     enableDll: false
   })
-  config.h5.webpackChain = chain => {
+  config.h5.webpackChain = (chain) => {
     chain.plugins.delete('htmlWebpackPlugin')
     chain.plugins.delete('addAssetHtmlWebpackPlugin')
     chain.merge({
@@ -106,7 +108,7 @@ if (process.env.TARO_BUILD_TYPE === 'ui') {
   }
 }
 
-module.exports = function(merge) {
+module.exports = function (merge) {
   if (process.env.NODE_ENV === 'development') {
     return merge({}, config, require('./dev'))
   }
