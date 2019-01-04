@@ -5,7 +5,7 @@
   "description": "A UI framework for taro.js",
   "scripts": {
     "release": "bash scripts/release.sh",
-    "test": "echo no test",
+    "test": "echo \"no test\"",
     "build": "cross-env TARO_BUILD_TYPE=ui taro build --ui",
     "build:weapp": "taro build --type weapp",
     "build:swan": "taro build --type swan",
