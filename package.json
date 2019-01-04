@@ -6,7 +6,10 @@
   "scripts": {
     "release": "bash scripts/release.sh",
     "test": "echo \"no test\"",
+    "lint": "npm run eslint",
+    "lint:fix": "npm run eslint:fix",
     "eslint": "eslint --cache \"src/**/*.{js,jsx,ts,tsx}\"",
+    "eslint:fix": "eslint --cache --fix \"src/**/*.{js,jsx,ts,tsx}\"",
     "ui:build": "cross-env TARO_BUILD_TYPE=ui taro build --ui",
     "ui:ci": "TARO_BUILD_TYPE=ui taro build --ui",
     "build:weapp": "taro build --type weapp",
@@ -42,12 +45,12 @@
   ],
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
+      "pre-commit": "npm run lint && lint-staged",
       "commit-msg": "commitlint -e $GIT_PARAMS"
     }
   },
   "lint-staged": {
-    "*.{js,jsx}": [
+    "*.{js,jsx,ts,tsx}": [
       "eslint --quiet --cache --fix",
       "git add"
     ]

@@ -5,7 +5,7 @@ install:
   - npm install -g @tarojs/cli
   - npm install
 script:
-  - npm run eslint
+  - npm run lint
   - npm run ui:ci
   - npm run test
 branches:
