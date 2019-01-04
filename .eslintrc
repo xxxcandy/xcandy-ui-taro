@@ -10,7 +10,6 @@
     "arrow-body-style": "warn",
     "taro/custom-component-children": "off",
     "no-unused-vars": ["error", { "varsIgnorePattern": "Taro" }],
-
     "import/prefer-default-export": "off",
     "lines-between-class-members": "error",
     "space-before-function-paren": "error",
