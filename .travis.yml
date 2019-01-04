@@ -2,10 +2,11 @@ language: node_js
 node_js:
   - "10"
 install:
+  - npm install -g @tarojs/cli
   - npm install
 script:
   - npm run eslint
-  - npm run ui:travis
+  - npm run ui:ci
   - npm run test
 branches:
   only:
