@@ -5,9 +5,12 @@ type Opts = {
 
 export default class ComputeTransform {
   private degree: number
+
   private offsetDegree?: number
+
   private res: string
-  compute({ degree, offsetDegree }: Opts) {
+
+  compute ({ degree, offsetDegree }: Opts) {
     if (this.degree !== degree || this.offsetDegree !== offsetDegree) {
       this.degree = degree
       this.offsetDegree = offsetDegree
@@ -19,7 +22,7 @@ export default class ComputeTransform {
   }
 }
 
-function transform({ degree, offsetDegree }: Opts) {
+function transform ({ degree, offsetDegree }: Opts) {
   const hdeg = (degree / 180) * Math.PI
 
   const m = Matrix.getRotateMatrix(0.25 * Math.PI)
@@ -38,13 +41,18 @@ function transform({ degree, offsetDegree }: Opts) {
 
 class Matrix {
   a
+
   b
+
   c
+
   d
+
   e
+
   f
 
-  static getRotateMatrix(hd) {
+  static getRotateMatrix (hd) {
     const m = new Matrix()
     m.a = Math.cos(hd)
     m.b = Math.sin(hd)
@@ -55,7 +63,7 @@ class Matrix {
     return m
   }
 
-  setScala(kx, ky) {
+  setScala (kx, ky) {
     const m = this
     m.a = m.a * kx
     m.b = m.b * ky
@@ -65,7 +73,7 @@ class Matrix {
     m.f = m.f * ky
   }
 
-  setRotate(hd) {
+  setRotate (hd) {
     const m = this
     const { a, b, c, d, e, f } = m
     const cosv = Math.cos(hd)

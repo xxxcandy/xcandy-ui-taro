@@ -33,7 +33,9 @@ const defaultProps: DefaultProps = {
 
 class XcArrow extends PureComponent<Props, State> {
   static defaultProps: DefaultProps = defaultProps
+
   computeTransform = new ComputeTransform()
+
   config: Taro.Config = {}
 
   handleClick = (e) => {
@@ -41,7 +43,7 @@ class XcArrow extends PureComponent<Props, State> {
     onClick && onClick(e)
   }
 
-  render() {
+  render () {
     const { className, color, size, weight, degree, offsetDegree } = this.props
     const trans = this.computeTransform.compute({ degree: degree || degree === 0 ? degree : 90, offsetDegree })
     const finalStyle = {
