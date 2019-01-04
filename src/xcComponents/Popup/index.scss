@@ -1,0 +1,16 @@
+.xc-popup__content {
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  left: 0;
+
+  width: 100%;
+
+  background: #fff;
+
+  transition: transform .3s ease;
+  transform: translate3d(0, 0, 0);
+  &--show {
+    transform: translate3d(0, -100%, 0);
+  }
+}

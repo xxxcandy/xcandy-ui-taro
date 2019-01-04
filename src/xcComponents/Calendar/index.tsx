@@ -23,6 +23,7 @@ type DateHooks = {
 export type UseDateHooks = (date: string, hooks: DateHooks) => void
 
 type OwnProps = {
+
   // event
   onSelect?(date: string[]): void
   onComputeDateDisable?(date: string, setDisable: (disable: boolean) => void): void
@@ -74,7 +75,7 @@ class XcCalendar extends Taro.Component<Props, State> {
     currentMonthRenderArrPro: []
   }
 
-  componentDidMount = () => {
+  componentDidMount () {
     if (this.props.firstRenderDate) {
       this.setState(
         {
@@ -87,7 +88,8 @@ class XcCalendar extends Taro.Component<Props, State> {
     }
   }
 
-  componentWillReceiveProps = nextProps => {
+  componentWillReceiveProps (nextProps) {
+
     // renderDefault
     const { firstRenderDate } = this.props
     if (!firstRenderDate && nextProps.firstRenderDate) {
@@ -171,7 +173,7 @@ class XcCalendar extends Taro.Component<Props, State> {
     return renderDatePro
   }
 
-  render() {
+  render () {
     const renderYear = this.state.renderDate.year()
     const renderMonth = this.state.renderDate.month() + 1
     const { themColor, currentMonthOnly } = this.props

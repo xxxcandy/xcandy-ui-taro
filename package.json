@@ -45,8 +45,8 @@
     }
   },
   "lint-staged": {
-    "*.{js,ts,tsx}": [
-      "eslint --quiet --cache --fix",
+    "*.{js,jsx,tsx,ts}": [
+      "eslint --quiet --fix",
       "git add"
     ]
   },

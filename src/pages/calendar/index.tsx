@@ -1,6 +1,8 @@
 import Taro from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import dayjs from 'dayjs'
+
+import XcCard from '@xcComponents/Card'
 import XcCalendar, { UseDateHooks } from '@xcComponents/Calendar'
 
 const format = 'YYYY/MM/DD'
@@ -10,6 +12,10 @@ const start = nowDate.subtract(3, 'month').format(format)
 const end = nowDate.add(3, 'month').format(format)
 
 class Index extends Taro.Component {
+  static config: Taro.Config = {
+    navigationBarTitleText: '日历'
+  }
+
   state = {
     calendarSelected_1: [],
     calendarSelected_2: [nowDate.format(format)]
@@ -35,15 +41,15 @@ class Index extends Taro.Component {
     }
   }
 
-  render() {
+  render () {
     return (
       <View className='page'>
-        <View>
-          <View>基础展示(默认无选中，只允许单选)</View>
+        <XcCard title='基础展示'>
+          <View>默认无选中，只允许单选</View>
           <View>当前选中 {this.state.calendarSelected_1[0] || '无'}</View>
           <XcCalendar onSelect={this.select1} selectedDate={this.state.calendarSelected_1} />
-        </View>
-        <View>
+        </XcCard>
+        <XcCard title='高级用法'>
           <View>不显示前后月</View>
           <View>格式化为`YYYY/MM/DD`</View>
           <View>将周末设置为不可被选中,并设置备注</View>
@@ -63,7 +69,7 @@ class Index extends Taro.Component {
             currentMonthOnly
             themColor='red'
           />
-        </View>
+        </XcCard>
       </View>
     )
   }

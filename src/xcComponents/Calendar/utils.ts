@@ -3,11 +3,11 @@ import { RenderDate } from './interface'
 
 const RENDER_DATE_TOTAL = 6 * 7
 
-function getISODateStr(year: number, month: number, date: number) {
+function getISODateStr (year: number, month: number, date: number) {
   return `${year}-${month < 10 ? '0' + month : month}-${date < 10 ? '0' + date : date}`
 }
 
-function computePreMonthRenderArr(currentRenderDate: dayjs.Dayjs) {
+function computePreMonthRenderArr (currentRenderDate: dayjs.Dayjs) {
   let renderLen = currentRenderDate.startOf('month').day() - 1
   let renderArr: RenderDate[] = []
 
@@ -28,7 +28,7 @@ function computePreMonthRenderArr(currentRenderDate: dayjs.Dayjs) {
   return renderArr
 }
 
-function computeCurrenMonthRenderArr(currentRenderDate: dayjs.Dayjs) {
+function computeCurrenMonthRenderArr (currentRenderDate: dayjs.Dayjs) {
   let renderLen = currentRenderDate.endOf('month').date()
   let renderArr: RenderDate[] = []
 
@@ -44,7 +44,7 @@ function computeCurrenMonthRenderArr(currentRenderDate: dayjs.Dayjs) {
   return renderArr
 }
 
-function computeNexMonthRenderArr(currentRenderDate: dayjs.Dayjs) {
+function computeNexMonthRenderArr (currentRenderDate: dayjs.Dayjs) {
   let preMonthDateCount = currentRenderDate.startOf('month').day()
   preMonthDateCount = preMonthDateCount > 0 ? preMonthDateCount - 1 : 0
 
@@ -65,4 +65,5 @@ function computeNexMonthRenderArr(currentRenderDate: dayjs.Dayjs) {
   }
   return renderArr
 }
+
 export { getISODateStr, computePreMonthRenderArr, computeCurrenMonthRenderArr, computeNexMonthRenderArr }
