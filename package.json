@@ -8,7 +8,7 @@
     "test": "echo \"no test\"",
     "eslint": "eslint --cache --ext .js,.jsx,.ts.tsx src/",
     "ui:build": "cross-env TARO_BUILD_TYPE=ui taro build --ui",
-    "ui:travis": "TARO_BUILD_TYPE=ui taro build --ui",
+    "ui:travis": "TARO_BUILD_TYPE=ui npx taro build --ui",
     "build:weapp": "taro build --type weapp",
     "build:swan": "taro build --type swan",
     "build:alipay": "taro build --type alipay",
