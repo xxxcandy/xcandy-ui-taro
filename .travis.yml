@@ -5,7 +5,7 @@ install:
   - npm install
 script:
   - npm run eslint
-  - npm run build
+  - npm run ui:travis
   - npm run test
 branches:
   only:
