@@ -6,7 +6,7 @@
   "scripts": {
     "release": "bash scripts/release.sh",
     "test": "echo \"no test\"",
-    "eslint": "eslint --cache --ext .js,.jsx,.ts.tsx src/",
+    "eslint": "eslint --cache \"src/**/*.{js,jsx,ts,tsx}\"",
     "ui:build": "cross-env TARO_BUILD_TYPE=ui taro build --ui",
     "ui:ci": "TARO_BUILD_TYPE=ui taro build --ui",
     "build:weapp": "taro build --type weapp",
