@@ -1,4 +1,4 @@
-import Taro from '@tarojs/taro'
+import Taro, { PureComponent } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import classnames from 'classnames'
 
@@ -19,11 +19,10 @@ const defaultProps: DefaultProps = {
   show: false
 }
 
-class XcPopup extends Taro.Component<Props> {
+class XcPopup extends PureComponent<Props> {
   static defaultProps: DefaultProps = defaultProps
 
   shouldComponentUpdate (nextProps) {
-    console.log(nextProps)
     if (nextProps === this.props.show) {
       return false
     } else {

@@ -1,5 +1,5 @@
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
+import { View } from '@tarojs/components'
 
 import XcCard from '@xcComponents/Card'
 import XcList from '@xcComponents/List'
@@ -35,14 +35,15 @@ const routes = [
   }
 ]
 
-const viewComponent = (url: string) => {
-  Taro.navigateTo({
-    url
-  })
-}
 export default class Index extends Component {
   config: Config = {
     navigationBarTitleText: '首页'
+  }
+
+  viewComponent = (url: string) => {
+    Taro.navigateTo({
+      url
+    })
   }
 
   render () {
@@ -52,7 +53,7 @@ export default class Index extends Component {
           <XcCard key={kind.name} title={kind.name}>
             <XcList>
               {kind.pages.map(component => (
-                <XcListItem arrow key={component.name} onClick={viewComponent.bind(this, component.url)}>
+                <XcListItem arrow key={component.name} onClick={this.viewComponent.bind(this, component.url)}>
                   <View>{component.name}</View>
                 </XcListItem>
               ))}

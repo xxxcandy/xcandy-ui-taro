@@ -1,4 +1,4 @@
-import Taro from '@tarojs/taro'
+import Taro, { PureComponent } from '@tarojs/taro'
 import dayjs from 'dayjs'
 import classNames from 'classnames'
 
@@ -23,7 +23,6 @@ type DateHooks = {
 export type UseDateHooks = (date: string, hooks: DateHooks) => void
 
 type OwnProps = {
-
   // event
   onSelect?(date: string[]): void
   onComputeDateDisable?(date: string, setDisable: (disable: boolean) => void): void
@@ -58,7 +57,11 @@ type State = Readonly<{
   nextMonthRenderArr: RenderDate[]
 }>
 
-class XcCalendar extends Taro.Component<Props, State> {
+class XcCalendar extends PureComponent<Props, State> {
+  constructor (props) {
+    super(props)
+  }
+
   static defaultProps: DefaultProps = {
     isMultiSelect: false,
     format: 'YYYY-MM-DD',
@@ -89,7 +92,6 @@ class XcCalendar extends Taro.Component<Props, State> {
   }
 
   componentWillReceiveProps (nextProps) {
-
     // renderDefault
     const { firstRenderDate } = this.props
     if (!firstRenderDate && nextProps.firstRenderDate) {

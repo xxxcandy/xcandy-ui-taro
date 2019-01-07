@@ -11,13 +11,6 @@ const firstRenderDate = nowDate.add(1, 'month').format(format)
 const start = nowDate.subtract(3, 'month').format(format)
 const end = nowDate.add(3, 'month').format(format)
 
-const useDateHooks: UseDateHooks = (date, { setIsDisable, setNote }) => {
-  const day = new Date(date).getDay()
-  if (day === 6 || day === 0) {
-    setIsDisable(true)
-    setNote('休息')
-  }
-}
 class Index extends Taro.Component {
   static config: Taro.Config = {
     navigationBarTitleText: '日历'
@@ -38,6 +31,14 @@ class Index extends Taro.Component {
     this.setState({
       calendarSelected_2: date
     })
+  }
+
+  useDateHooks: UseDateHooks = (date, { setIsDisable, setNote }) => {
+    const day = new Date(date).getDay()
+    if (day === 6 || day === 0) {
+      setIsDisable(true)
+      setNote('休息')
+    }
   }
 
   render () {
@@ -63,7 +64,7 @@ class Index extends Taro.Component {
             firstRenderDate={firstRenderDate}
             onSelect={this.select2}
             selectedDate={this.state.calendarSelected_2}
-            onDateHooks={useDateHooks}
+            onDateHooks={this.useDateHooks}
             format='YYYY/MM/DD'
             currentMonthOnly
             themColor='red'
