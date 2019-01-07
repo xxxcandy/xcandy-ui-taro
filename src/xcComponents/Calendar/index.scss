@@ -70,6 +70,8 @@
     padding: 15px 0;
 
     cursor: pointer;
+
+    -webkit-tap-highlight-color: transparent;
     &__note {
       font-size: 22px;
     }
@@ -81,7 +83,7 @@
     &--other-month {
       opacity: .1;
 
-      cursor: not-allowed;
+      cursor: auto;
     }
     &--selected {
       color: #fff;
