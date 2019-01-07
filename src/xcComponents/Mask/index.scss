@@ -13,7 +13,7 @@
     opacity: 0;
     background: #000;
 
-    transition: all .3s ease-in-out;
+    transition: all .25s;
     &--show {
       visibility: visible;
 
@@ -33,6 +33,7 @@
 
     opacity: 0;
 
+    transition: all .25s;
     transform: translateZ(1px);
     &--show {
       visibility: visible;

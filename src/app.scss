@@ -1,6 +1,7 @@
-page, .page {
-  overflow: hidden;
+.page {
+  overflow: auto;
 
+  box-sizing: border-box;
   min-height: 100vh;
   padding: 0 20px 80px;
 

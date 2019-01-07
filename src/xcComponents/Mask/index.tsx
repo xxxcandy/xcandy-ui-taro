@@ -1,4 +1,4 @@
-import Taro from '@tarojs/taro'
+import Taro, { PureComponent } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import classnames from 'classnames'
 
@@ -18,7 +18,7 @@ const defaultProps: DefaultProps = {
   show: false
 }
 
-class XcMask extends Taro.Component<Props> {
+class XcMask extends PureComponent<Props> {
   static defaultProps: DefaultProps = defaultProps
 
   config: Taro.Config = {}
