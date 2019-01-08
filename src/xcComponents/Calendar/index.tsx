@@ -25,11 +25,9 @@ export type UseDateHooks = (date: string, hooks: DateHooks) => void
 type OwnProps = {
   // event
   onSelect?(date: string[]): void
-  onComputeDateDisable?(date: string, setDisable: (disable: boolean) => void): void
-  onComputeDateNote?(date: string, setNote: (note: string) => void): void
   onDateHooks?: UseDateHooks
 
-  firstRenderDate?: Date | dayjs.Dayjs | string
+  currentDate?: Date | dayjs.Dayjs | string
   start?: CalendarDate
   end?: CalendarDate
   isMultiSelect?: boolean
@@ -55,13 +53,11 @@ type State = Readonly<{
   preMonthRenderArr: RenderDate[]
   currentMonthRenderArrPro: RenderDatePro[]
   nextMonthRenderArr: RenderDate[]
+  isStartMonth: boolean
+  isEndMonth: boolean
 }>
 
 class XcCalendar extends PureComponent<Props, State> {
-  constructor (props) {
-    super(props)
-  }
-
   static defaultProps: DefaultProps = {
     isMultiSelect: false,
     format: 'YYYY-MM-DD',
@@ -75,14 +71,17 @@ class XcCalendar extends PureComponent<Props, State> {
     renderDate: dayjs(),
     preMonthRenderArr: [],
     nextMonthRenderArr: [],
+    isStartMonth: false,
+    isEndMonth: false,
     currentMonthRenderArrPro: []
   }
 
   componentDidMount () {
-    if (this.props.firstRenderDate) {
+    const { currentDate } = this.props
+    if (currentDate) {
       this.setState(
         {
-          renderDate: dayjs(this.props.firstRenderDate)
+          renderDate: dayjs(currentDate)
         },
         this.renderNewMonth
       )
@@ -91,56 +90,64 @@ class XcCalendar extends PureComponent<Props, State> {
     }
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps (nextProps: Props) {
     // renderDefault
-    const { firstRenderDate } = this.props
-    if (!firstRenderDate && nextProps.firstRenderDate) {
-      this.setState({ renderDate: dayjs(nextProps.firstRenderDate) }, this.renderNewMonth)
+    const { currentDate, onDateHooks } = this.props
+    if (currentDate !== nextProps.currentDate || onDateHooks !== nextProps.onDateHooks) {
+      this.setState({ renderDate: dayjs(nextProps.currentDate) }, this.renderNewMonth)
     }
   }
 
   renderNewMonth = () => {
-    const currentRenderDate = this.state.renderDate
-    const preMonthRenderArr = computePreMonthRenderArr(currentRenderDate)
-    const currentMonthRenderArr = computeCurrenMonthRenderArr(currentRenderDate)
-    const nextMonthRenderArr = this.props.currentMonthOnly ? [] : computeNexMonthRenderArr(currentRenderDate)
+    const { renderDate } = this.state
+    const { start, end } = this.props
 
+    let isStartMonth = false
+    let isEndMonth = false
+    const renderDateMonthStart = renderDate.startOf('month')
+    const preMonthRenderArr = computePreMonthRenderArr(renderDate)
+    const currentMonthRenderArr = computeCurrenMonthRenderArr(renderDate)
+    const nextMonthRenderArr = this.props.currentMonthOnly ? [] : computeNexMonthRenderArr(renderDate)
+
+    start &&
+      (isStartMonth = dayjs(start)
+        .startOf('month')
+        .isSame(renderDateMonthStart))
+    end &&
+      (isEndMonth = dayjs(end)
+        .startOf('month')
+        .isSame(renderDateMonthStart))
     this.setState({
       preMonthRenderArr,
       currentMonthRenderArrPro: currentMonthRenderArr.map(item => this.computeRenderDatePro(item)),
-      nextMonthRenderArr
+      nextMonthRenderArr,
+      isStartMonth,
+      isEndMonth
     })
   }
 
   clickPreMonth = () => {
-    if (
-      dayjs(this.state.renderDate)
-        .startOf('month')
-        .isSame(dayjs(this.props.start).startOf('month'))
-    ) {
-      return Taro.showToast({ title: '已经到底了' })
-    }
+    const { start } = this.props
+    const { renderDate } = this.state
+    const preMonth = renderDate.subtract(1, 'month')
+    if (start && dayjs(start).isAfter(preMonth)) return
     this.setState(
       {
-        renderDate: this.state.renderDate.subtract(1, 'month')
+        renderDate: preMonth
       },
       this.renderNewMonth
     )
   }
 
   clickNextMonth = () => {
-    if (
-      this.props.end &&
-      dayjs(this.state.renderDate)
-        .startOf('month')
-        .isSame(dayjs(this.props.end).startOf('month'))
-    ) {
-      return Taro.showToast({ title: '已经到底了' })
-    }
+    const { end } = this.props
+    const { renderDate } = this.state
+    const nextMonth = renderDate.add(1, 'month')
+    if (end && dayjs(end).isBefore(nextMonth)) return
 
     this.setState(
       {
-        renderDate: this.state.renderDate.add(1, 'month')
+        renderDate: nextMonth
       },
       this.renderNewMonth
     )
@@ -162,42 +169,56 @@ class XcCalendar extends PureComponent<Props, State> {
   }
 
   computeRenderDatePro = (renderDate: RenderDate) => {
+    const { format, onDateHooks, start, end } = this.props
     const renderDatePro = new RenderDatePro(renderDate)
-    const { format, onComputeDateDisable, onComputeDateNote, onDateHooks } = this.props
-    const dateStr = dayjs(renderDatePro.str).format(format)
+    const date = dayjs(renderDatePro.str)
+    const dateStr = date.format(format)
+
+    if ((start && date.isBefore(dayjs(start))) || (end && date.isAfter(dayjs(end)))) {
+      renderDatePro.note = ''
+      renderDatePro.isDisable = true
+      return renderDatePro
+    }
+
+    // date hooks
     const setIsDisable: SetValue = _isDisable => (renderDatePro.isDisable = _isDisable)
     const setNote: SetValue = _note => (renderDatePro.note = _note)
     onDateHooks && onDateHooks(dateStr, { setIsDisable, setNote })
-
-    // TODO: 即将移除
-    onComputeDateDisable && onComputeDateDisable(dateStr, setIsDisable)
-    onComputeDateNote && onComputeDateNote(dateStr, setNote)
     return renderDatePro
   }
 
   render () {
-    const renderYear = this.state.renderDate.year()
-    const renderMonth = this.state.renderDate.month() + 1
     const { themColor, currentMonthOnly } = this.props
+    const { renderDate, isStartMonth, isEndMonth } = this.state
+    const renderYear = renderDate.year()
+    const renderMonth = renderDate.month() + 1
     return (
       <View className='xc-calendar'>
         <View className='xc-calendar__title'>
-          <View
-            className='xc-calendar__month-siwtch-btn'
-            style={`background-color: ${themColor}`}
-            onClick={this.clickPreMonth}
-          >
-            <XcArrow degree={270} weight='2px' color='#fff' size='8px' />
+          <View className='xc-calendar__month-switch'>
+            {!isStartMonth && (
+              <View
+                className='xc-calendar__month-switch__button'
+                style={`background-color: ${themColor}`}
+                onClick={this.clickPreMonth}
+              >
+                <XcArrow degree={270} weight='2px' color='#fff' size='8px' />
+              </View>
+            )}
           </View>
           <View>
             {renderYear}年{renderMonth}月
           </View>
-          <View
-            className='xc-calendar__month-siwtch-btn'
-            style={`background-color: ${themColor}`}
-            onClick={this.clickNextMonth}
-          >
-            <XcArrow weight='2px' color='#fff' size='8px' />
+          <View className='xc-calendar__month-switch'>
+            {!isEndMonth && (
+              <View
+                className='xc-calendar__month-switch__button'
+                style={`background-color: ${themColor}`}
+                onClick={this.clickNextMonth}
+              >
+                <XcArrow weight='2px' color='#fff' size='8px' />
+              </View>
+            )}
           </View>
         </View>
         <View className='xc-calendar__content'>

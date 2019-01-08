@@ -7,11 +7,11 @@ import XcCalendar, { UseDateHooks } from '@xcComponents/Calendar'
 
 const format = 'YYYY/MM/DD'
 const nowDate = dayjs()
-const firstRenderDate = nowDate.add(1, 'month').format(format)
+const currentDate = nowDate.add(1, 'month').format(format)
 const start = nowDate.subtract(3, 'month').format(format)
 const end = nowDate.add(3, 'month').format(format)
 
-class Index extends Taro.Component {
+class CalendarPage extends Taro.Component {
   static config: Taro.Config = {
     navigationBarTitleText: '日历'
   }
@@ -61,7 +61,7 @@ class Index extends Taro.Component {
           <XcCalendar
             start={start}
             end={end}
-            firstRenderDate={firstRenderDate}
+            currentDate={currentDate}
             onSelect={this.select2}
             selectedDate={this.state.calendarSelected_2}
             onDateHooks={this.useDateHooks}
@@ -75,4 +75,4 @@ class Index extends Taro.Component {
   }
 }
 
-export default Index
+export default CalendarPage

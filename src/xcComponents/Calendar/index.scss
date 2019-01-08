@@ -12,20 +12,23 @@
     font-weight: bold;
     line-height: 1.4;
   }
-  &__month-siwtch-btn {
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
+  &__month-switch {
+    overflow: hidden;
 
     width: 68px;
     height: 42px;
     margin: 0 (100%/7/2);
     border-radius: 4px;
+    &__button {
+      display: flex;
 
-    background-color: #0056ff;
-    &--disabled {
-      opacity: 0;
+      justify-content: center;
+      align-items: center;
+
+      width: 100%;
+      height: 100%;
+
+      background-color: #0056ff;
     }
   }
   &__content {
