@@ -1,4 +1,4 @@
-import { RenderDate } from './calendar'
+import { RenderDate } from './interface'
 
 class RenderDatePro {
   isDisable = false
