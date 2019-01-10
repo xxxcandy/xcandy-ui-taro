@@ -22,14 +22,6 @@ const defaultProps: DefaultProps = {
 class XcPopup extends PureComponent<Props> {
   static defaultProps: DefaultProps = defaultProps
 
-  shouldComponentUpdate (nextProps) {
-    if (nextProps === this.props.show) {
-      return false
-    } else {
-      return true
-    }
-  }
-
   handleClickMask = () => {
     const { onClickMask } = this.props
     onClickMask && onClickMask()

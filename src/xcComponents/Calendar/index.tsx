@@ -91,7 +91,6 @@ class XcCalendar extends PureComponent<Props, State> {
   }
 
   componentWillReceiveProps (nextProps: Props) {
-    // renderDefault
     const { currentDate, onDateHooks } = this.props
     if (currentDate !== nextProps.currentDate || onDateHooks !== nextProps.onDateHooks) {
       this.setState({ renderDate: dayjs(nextProps.currentDate) }, this.renderNewMonth)
