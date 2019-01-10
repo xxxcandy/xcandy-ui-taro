@@ -23,14 +23,6 @@ class XcMask extends PureComponent<Props> {
 
   config: Taro.Config = {}
 
-  shouldComponentUpdate (nextProps) {
-    if (nextProps === this.props.show) {
-      return false
-    } else {
-      return true
-    }
-  }
-
   handleClick = () => {
     const { onClick } = this.props
     onClick && onClick()

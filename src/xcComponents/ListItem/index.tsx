@@ -1,4 +1,4 @@
-import Taro from '@tarojs/taro'
+import Taro, { PureComponent } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 
 import './index.scss'
@@ -14,15 +14,14 @@ type DefaultProps = {}
 
 type Props = OwnProps & DefaultProps
 
-class XcListItem extends Taro.Component<Props> {
-
+class XcListItem extends PureComponent<Props> {
   handleClick = () => {
     const { onClick, disable } = this.props
     !disable && onClick && onClick()
   }
 
   render () {
-    const {arrow} = this.props
+    const { arrow } = this.props
     const arrowStyle = {
       transform: `rotate(45deg)`
     }

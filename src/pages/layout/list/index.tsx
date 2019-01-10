@@ -1,11 +1,11 @@
-import Taro from '@tarojs/taro'
+import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 
 import XcList from '@xcComponents/List'
 import XcListItem from '@xcComponents/ListItem'
 import XcCard from '@xcComponents/Card'
 
-class ListPage extends Taro.Component {
+class ListPage extends Component {
   render () {
     return (
       <View className='page'>

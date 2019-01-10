@@ -1,4 +1,4 @@
-import Taro from '@tarojs/taro'
+import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import classnames from 'classnames'
 
@@ -9,7 +9,7 @@ type Props = {
   rightIndent?: boolean
 }
 
-class XcList extends Taro.Component<Props> {
+class XcList extends Component<Props> {
   render () {
     const { leftIndent, rightIndent } = this.props
     const classNames = classnames('xc-list', {

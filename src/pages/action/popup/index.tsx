@@ -1,10 +1,10 @@
-import Taro from '@tarojs/taro'
+import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 
 import XcPopup from '@xcComponents/Popup'
 import XcCard from '@xcComponents/Card'
 
-class PopupPage extends Taro.Component {
+class PopupPage extends Component {
   static config: Taro.Config = {
     navigationBarTitleText: 'Popup'
   }
