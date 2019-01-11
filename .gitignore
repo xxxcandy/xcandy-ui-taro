@@ -6,6 +6,7 @@ node_modules/
 
 # dist
 dist/
+dist_component/
 
 # temp
 .temp/

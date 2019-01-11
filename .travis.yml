@@ -1,14 +1,24 @@
 language: node_js
+
 node_js:
-  - "10"
+  - '10'
+
 install:
   - npm install -g @tarojs/cli
   - npm install
+
 script:
   - npm run lint
   - npm run ui:ci
   - npm run test
+
+after_script:
+  - test $TRAVIS_BRANCH = master && npm run update:site
+
 branches:
   only:
     - master
     - /^greenkeeper/.*$/
+
+env:
+  - GH_REF: github.com/loveonelong/xcandy.git
