@@ -18,7 +18,7 @@ class CalendarPage extends Component {
 
   state = {
     calendarSelected_1: [],
-    calendarSelected_2: [nowDate.format(format)]
+    calendarSelected_2: [nowDate.add(1,'day').format(format)]
   }
 
   select1 = (date: string[]) => {
