@@ -1,0 +1,43 @@
+.xc-drawer__content {
+  position: absolute;
+  z-index: 1;
+
+  background: #fff;
+
+  transition: transform .25s;
+  transform: translate3d(0, 0, 1px);
+  &--top, &--bottom {
+    left: 0;
+
+    width: 100%;
+  }
+  &--top {
+    bottom: 100%;
+    &--show {
+      transform: translate3d(0, 100%, 1px);
+    }
+  }
+  &--bottom {
+    top: 100%;
+    &--show {
+      transform: translate3d(0, -100%, 1px);
+    }
+  }
+  &--right, &--left {
+    top: 0;
+
+    height: 100%;
+  }
+  &--right {
+    left: 100%;
+    &--show {
+      transform: translate3d(-100%, 0, 1px);
+    }
+  }
+  &--left {
+    right: 100%;
+    &--show {
+      transform: translate3d(100%, 0, 1px);
+    }
+  }
+}

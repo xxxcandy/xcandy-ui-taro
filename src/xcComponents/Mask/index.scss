@@ -1,40 +1,32 @@
 .xc-mask {
-  &__floor {
-    visibility: hidden;
-    position: fixed;
-    z-index: 999;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+  visibility: hidden;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 
-    height: 100%;
+  height: 100%;
 
-    opacity: 0;
-    background: #000;
+  background: rgba(0, 0, 0, 0);
 
-    transition: all .25s;
-    &--show {
-      visibility: visible;
+  transition: all .25s;
+  &--show {
+    visibility: visible;
 
-      opacity: .6;
-    }
+    background: rgba(0, 0, 0, .6);
   }
-  &__layer {
+  &__interlayer {
     visibility: hidden;
-    position: fixed;
-    z-index: 999;
+    position: absolute;
+    z-index: -1;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
 
-    height: 100%;
-
     opacity: 0;
-
-    transition: all .25s;
-    transform: translateZ(1px);
     &--show {
       visibility: visible;
 

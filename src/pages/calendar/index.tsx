@@ -12,13 +12,13 @@ const start = nowDate.subtract(3, 'month').format(format)
 const end = nowDate.add(3, 'month').format(format)
 
 class CalendarPage extends Component {
-  static config: Taro.Config = {
-    navigationBarTitleText: '日历'
+  config: Taro.Config = {
+    navigationBarTitleText: 'Calendar 日历'
   }
 
   state = {
     calendarSelected_1: [],
-    calendarSelected_2: [nowDate.format(format)]
+    calendarSelected_2: [nowDate.add(1, 'day').format(format)]
   }
 
   select1 = (date: string[]) => {

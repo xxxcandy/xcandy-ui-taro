@@ -1,4 +1,4 @@
-import Taro from '@tarojs/taro'
+import Taro, { Component } from '@tarojs/taro'
 
 import { View } from '@tarojs/components'
 
@@ -10,9 +10,10 @@ type OwnProps = {
 type DefaultProps = {}
 type Props = OwnProps & DefaultProps
 
-class XcCard extends Taro.Component<Props> {
+class XcCard extends Component<Props> {
   render () {
     const { title } = this.props
+
     return (
       <View className='xc-card'>
         {title && <View className='xc-card__title'>{title}</View>}

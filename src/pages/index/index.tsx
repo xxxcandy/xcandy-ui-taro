@@ -10,8 +10,17 @@ const routes = [
     name: '布局',
     pages: [
       {
-        name: '列表',
+        name: 'List 列表',
         url: '/pages/layout/list/index'
+      }
+    ]
+  },
+  {
+    name: '原子组件',
+    pages: [
+      {
+        name: 'Mask 遮罩',
+        url: '/pages/atomic/mask/index'
       }
     ]
   },
@@ -19,8 +28,8 @@ const routes = [
     name: '操作',
     pages: [
       {
-        name: 'popup',
-        url: '/pages/action/popup/index'
+        name: 'Drawer 抽屉',
+        url: '/pages/action/drawer/index'
       }
     ]
   },
@@ -28,7 +37,7 @@ const routes = [
     name: '高级组件',
     pages: [
       {
-        name: '日历组件',
+        name: 'Calendar 日历组件',
         url: '/pages/calendar/index'
       }
     ]

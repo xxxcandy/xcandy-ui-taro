@@ -11,7 +11,7 @@ type OwnProps = {
   weight?: string
   color?: string
 
-  onClick?: (e: HTMLElement)=> void
+  onClick?: (e: HTMLElement) => void
 }
 
 type DefaultProps = {
@@ -35,8 +35,6 @@ class XcArrow extends PureComponent<Props, State> {
   static defaultProps: DefaultProps = defaultProps
 
   computeTransform = new ComputeTransform()
-
-  config: Taro.Config = {}
 
   handleClick = (e) => {
     const { onClick } = this.props
