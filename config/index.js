@@ -59,7 +59,7 @@ const config = {
     }
   },
   h5: {
-    publicPath: '/',
+    publicPath: '/xcandy',
     staticDirectory: 'static',
     module: {
       postcss: {
@@ -82,11 +82,15 @@ const config = {
 }
 
 if (process.env.TARO_BUILD_TYPE === 'ui') {
-  Object.assign(config.h5, {
-    enableSourceMap: false,
-    enableExtract: false,
-    enableDll: false
+  Object(config, {
+    outputRoot: 'dist_component',
+    h5: Object.assign(config.h5, {
+      enableSourceMap: false,
+      enableExtract: false,
+      enableDll: false
+    })
   })
+
   config.h5.webpackChain = (chain) => {
     chain.plugins.delete('htmlWebpackPlugin')
     chain.plugins.delete('addAssetHtmlWebpackPlugin')
