@@ -1,4 +1,4 @@
-import Taro, { PureComponent } from '@tarojs/taro'
+import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 
 import './index.scss'
@@ -14,7 +14,7 @@ type DefaultProps = {}
 
 type Props = OwnProps & DefaultProps
 
-class XcListItem extends PureComponent<Props> {
+class XcListItem extends Component<Props> {
   handleClick = () => {
     const { onClick, disable } = this.props
     !disable && onClick && onClick()

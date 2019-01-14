@@ -65,8 +65,6 @@ class XcCalendar extends PureComponent<Props, State> {
     selectedDate: []
   }
 
-  static config: Taro.Config = {}
-
   readonly state: State = {
     renderDate: dayjs(),
     preMonthRenderArr: [],

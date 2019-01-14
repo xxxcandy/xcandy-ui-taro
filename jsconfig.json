@@ -3,7 +3,8 @@
     "baseUrl": "./",
     "paths": {
       "@components/*": ["./src/components/*"],
-      "@xcComponents/*": ["./src/xcComponents/*"]
+      "@xcComponents/*": ["./src/xcComponents/*"],
+      "@myComponents/*": ["./src/myComponents/*"]
     }
   }
 }

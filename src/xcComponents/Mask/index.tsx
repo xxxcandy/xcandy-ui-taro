@@ -1,11 +1,11 @@
-import Taro, { PureComponent } from '@tarojs/taro'
+import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import classnames from 'classnames'
 
 import './index.scss'
 
 type OwnProps = {
-  onClick?: () => void
+  onClickMask?: () => void
 }
 
 type DefaultProps = {
@@ -18,14 +18,12 @@ const defaultProps: DefaultProps = {
   show: false
 }
 
-class XcMask extends PureComponent<Props> {
+class XcMask extends Component<Props> {
   static defaultProps: DefaultProps = defaultProps
 
-  config: Taro.Config = {}
-
-  handleClick = () => {
-    const { onClick } = this.props
-    onClick && onClick()
+  handleMaskClick = () => {
+    const { onClickMask } = this.props
+    onClickMask && onClickMask()
   }
 
   catchContentClick = (e) => {
@@ -34,19 +32,17 @@ class XcMask extends PureComponent<Props> {
 
   render () {
     const { show } = this.props
-    const maskFloorClassNames = classnames('xc-mask__floor', {
-      'xc-mask__floor--show': show
+    const maskClassNames = classnames('xc-mask', {
+      'xc-mask--show': show
     })
-    const maskLayerClassNames = classnames('xc-mask__layer', {
-      'xc-mask__layer--show': show
+    const maskInterlayerClassNames = classnames('xc-mask__interlayer', {
+      'xc-mask__interlayer--show': show
     })
     return (
-      <View>
-        {/* 分两层避免背景层透明度和动画影响内容区 */}
-        <View className={maskFloorClassNames} />
-        <View className={maskLayerClassNames} onClick={this.handleClick}>
-          <View onClick={this.catchContentClick}>{this.props.children}</View>
-        </View>
+      <View className={maskClassNames}>
+        {/* interlayer 用于触发对mask区域的点击，为了避免mask在关闭的动画过程中，用户再次点击仍然触发handleMaskClick */}
+        <View className={maskInterlayerClassNames} onClick={this.handleMaskClick} />
+        <View onClick={this.catchContentClick}>{this.props.children}</View>
       </View>
     )
   }
