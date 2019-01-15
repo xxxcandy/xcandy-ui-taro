@@ -2,7 +2,6 @@ language: node_js
 
 node_js:
   - '10'
-  - '8'
 
 install:
   - npm install -g @tarojs/cli
@@ -20,6 +19,19 @@ branches:
   only:
     - master
     - /^greenkeeper/.*$/
+
+before_deploy: npm run ui:ci
+
+deploy:
+  provider: npm
+  email: love@onelong.org
+  skip_cleanup: true
+  api_key:
+    secure: $NPM_TOKEN
+  on:
+    tags: true
+    branch: master
+  tag: latest
 
 env:
   - GH_REF: github.com/loveonelong/xcandy.git
