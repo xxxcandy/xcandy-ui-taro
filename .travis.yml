@@ -34,7 +34,7 @@ jobs:
           secure: $NPM_TOKEN
         on:
           tags: true
-          branch: master
+          all_branches: true
         tag: latest
     - stage: git page
       node_js: '10'
