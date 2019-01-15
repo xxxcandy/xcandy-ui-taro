@@ -1,4 +1,5 @@
-/* base */
+/* atomic */
+export { default as XcMask } from './xcComponents/Mask'
 
 /* layout */
 export { default as XcCard } from './xcComponents/Card'
@@ -7,8 +8,7 @@ export { default as XcListItem } from './xcComponents/ListItem'
 export { default as XcArrow } from './xcComponents/Arrow'
 
 /* action */
-export { default as XcPopup } from './xcComponents/Popup'
-export { default as XcMask } from './xcComponents/Mask'
+export { default as XcDrawer } from './xcComponents/Drawer'
 
 /* other */
 export { default as XcCalendar } from './xcComponents/Calendar'
