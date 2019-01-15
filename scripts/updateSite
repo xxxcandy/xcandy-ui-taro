@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-echo 'Update Site'
+echo 'Update Site...'
 
 npm run build:h5
 cd dist
@@ -11,4 +11,3 @@ git config user.email "love@onelong.org"
 git add .
 git commit -m "Update Site"
 git push --force --quiet "https://${GITHUB_TOKEN}@${GH_REF}" master:gh-pages
-cd ../

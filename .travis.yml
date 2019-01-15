@@ -11,6 +11,9 @@ install:
 script:
   - npm run lint
   - npm run test
+  - npm run ui:ci
+  - npm run build:h5
+  - npm run build:weapp
 
 branches:
   only:
