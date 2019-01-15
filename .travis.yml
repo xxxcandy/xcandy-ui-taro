@@ -2,6 +2,7 @@ language: node_js
 
 node_js:
   - '10'
+  - '8'
 
 install:
   - npm install -g @tarojs/cli
@@ -9,29 +10,38 @@ install:
 
 script:
   - npm run lint
-  - npm run ui:ci
   - npm run test
-
-after_script:
-  - test $TRAVIS_BRANCH = master && npm run update:site
+  - npm run ui:ci
+  - npm run build:h5
+  - npm run build:weapp
 
 branches:
   only:
     - master
-    - /^greenkeeper/.*$/
 
-before_deploy: npm run ui:ci
-
-deploy:
-  provider: npm
-  email: love@onelong.org
-  skip_cleanup: true
-  api_key:
-    secure: $NPM_TOKEN
-  on:
-    tags: true
-    branch: master
-  tag: latest
+jobs:
+  include:
+    - stage: npm release
+      node_js: '10'
+      script:
+        - echo "Deploying to npm ..."
+      before_deploy: npm run ui:ci
+      deploy:
+        provider: npm
+        email: love@onelong.org
+        skip_cleanup: true
+        api_key:
+          secure: $NPM_TOKEN
+        on:
+          tags: true
+          branch: master
+        tag: latest
+    - stage: git page
+      node_js: '10'
+      script:
+        - if [ "$TRAVIS_BRANCH" == "master" ] && [ "${TRAVIS_PULL_REQUEST}" == "false" ]; then
+          npm run update:site;
+          fi
 
 env:
   - GH_REF: github.com/loveonelong/xcandy.git
