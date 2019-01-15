@@ -13,12 +13,13 @@ script:
   - npm run test
 
 after_script:
-  - test $TRAVIS_BRANCH = master && npm run update:site
+  - if [ "$TRAVIS_BRANCH" == "master" ] && [ "${TRAVIS_PULL_REQUEST}" == "false" ]; then
+      npm run update:site;
+    fi
 
 branches:
   only:
     - master
-    - /^greenkeeper/.*$/
 
 before_deploy: npm run ui:ci
 
