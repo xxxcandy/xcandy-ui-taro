@@ -33,10 +33,10 @@ class CalendarPage extends Component {
     })
   }
 
-  useDateHooks: UseDateHooks = (date, { setIsDisable, setNote }) => {
+  useDateHooks: UseDateHooks = (date, { setDisable, setNote }) => {
     const day = new Date(date).getDay()
     if (day === 6 || day === 0) {
-      setIsDisable(true)
+      setDisable(true)
       setNote('休息')
     }
   }

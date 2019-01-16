@@ -16,7 +16,7 @@ type CalendarDate = Date | dayjs.Dayjs | string
 type SetValue = (value: any) => void
 
 type DateHooks = {
-  setIsDisable: SetValue
+  setDisable: SetValue
   setNote: SetValue
 }
 
@@ -173,14 +173,14 @@ class XcCalendar extends PureComponent<Props, State> {
 
     if ((start && date.isBefore(dayjs(start))) || (end && date.isAfter(dayjs(end)))) {
       renderDatePro.note = ''
-      renderDatePro.isDisable = true
+      renderDatePro.disable = true
       return renderDatePro
     }
 
     // date hooks
-    const setIsDisable: SetValue = _isDisable => (renderDatePro.isDisable = _isDisable)
+    const setDisable: SetValue = _disable => (renderDatePro.disable = _disable)
     const setNote: SetValue = _note => (renderDatePro.note = _note)
-    onDateHooks && onDateHooks(dateStr, { setIsDisable, setNote })
+    onDateHooks && onDateHooks(dateStr, { setDisable, setNote })
     return renderDatePro
   }
 
@@ -240,12 +240,12 @@ class XcCalendar extends PureComponent<Props, State> {
             {this.state.currentMonthRenderArrPro.map((date, index) => {
               const isSelected = this.coumputeIsSelected(date.str)
               const itemClass = classNames('xc-calendar__date', {
-                'xc-calendar__date--disable': date.isDisable,
+                'xc-calendar__date--disable': date.disable,
                 'xc-calendar__date--selected': isSelected
               })
               const itemStyle = { backgroundColor: themColor }
               return (
-                <View key={index} className={itemClass} onClick={this.clickItem.bind(this, date.str, date.isDisable)}>
+                <View key={index} className={itemClass} onClick={this.clickItem.bind(this, date.str, date.disable)}>
                   <View> {date.date}</View>
                   {date.note && <View className='xc-calendar__date__note'>{date.note}</View>}
                   {isSelected && <View className='xc-calendar__date__bg--selected' style={itemStyle} />}
