@@ -1,7 +1,7 @@
 import { RenderDate } from './interface'
 
 class RenderDatePro {
-  isDisable = false
+  disable = false
 
   note = ''
 
