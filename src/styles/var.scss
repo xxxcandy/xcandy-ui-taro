@@ -1,5 +1,9 @@
 $page-background-color: #f6f6f6;
 
+// z-index
+$mask__z-index: 1000;
+$drawer__z-index: 500;
+
 // border-radius
 $border-radius-small: 2PX;
 $border-radius-middle: 4PX;
@@ -16,3 +20,7 @@ $section__background-color: #fff;
 $section-title__margin-bottom: 20px;
 $section-title__font-size: 32px;
 $section-title__font-weight: 400;
+
+// mask
+$mask__transition-duration: .2s;
+$mask__opacity: .6;

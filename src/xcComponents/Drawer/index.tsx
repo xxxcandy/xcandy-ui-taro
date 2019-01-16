@@ -18,12 +18,14 @@ type OwnProps = {
 type DefaultProps = {
   show: boolean
   placement: string
+  mask: boolean
 }
 
 type Props = OwnProps & DefaultProps
 
 const defaultProps: DefaultProps = {
   show: false,
+  mask: true,
   placement: 'bottom'
 }
 
@@ -36,16 +38,23 @@ class XcDrawer extends Component<Props> {
   }
 
   render () {
-    const { placement, show } = this.props
+    const { placement, show, mask } = this.props
 
     const placementClassName = `xc-drawer__content--${placements[placement] || placements.bottom}`
     const contentClassNames = classnames('xc-drawer__content', placementClassName, {
+      'xc-drawer__content--no-mask': !mask,
       [`${placementClassName}--show`]: show
     })
     return (
-      <XcMask show={show} onClickMask={this.handleClickMask}>
-        <View className={contentClassNames}>{this.props.children}</View>
-      </XcMask>
+      <View className='xc-drawer'>
+        {mask ? (
+          <XcMask show={show} onClickMask={this.handleClickMask}>
+            <View className={contentClassNames}>{this.props.children}</View>
+          </XcMask>
+        ) : (
+          <View className={contentClassNames}>{this.props.children}</View>
+        )}
+      </View>
     )
   }
 }

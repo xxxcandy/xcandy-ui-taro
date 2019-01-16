@@ -1,21 +1,20 @@
+@import '../../styles/var.scss';
 .xc-mask {
   visibility: hidden;
   position: fixed;
-  z-index: 999;
+  z-index: $mask__z-index;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
 
-  height: 100%;
+  background-color: rgba(0, 0, 0, 0);
 
-  background: rgba(0, 0, 0, 0);
-
-  transition: all .25s;
+  transition: visibility $mask__transition-duration, background-color $mask__transition-duration;
   &--show {
     visibility: visible;
 
-    background: rgba(0, 0, 0, .6);
+    background-color: rgba(0, 0, 0, $mask__opacity);
   }
   &__interlayer {
     visibility: hidden;
@@ -25,12 +24,8 @@
     right: 0;
     bottom: 0;
     left: 0;
-
-    opacity: 0;
     &--show {
       visibility: visible;
-
-      opacity: 1;
     }
   }
 }
