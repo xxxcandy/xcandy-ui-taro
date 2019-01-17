@@ -3,7 +3,7 @@ import { View } from '@tarojs/components'
 
 import ComputeTransform from './computeTransform'
 
-type OwnProps = {
+type WantProps = {
   degree?: number
   offsetDegree?: number
   className?: string
@@ -17,9 +17,9 @@ type DefaultProps = {
   size: string
 }
 
-type Props = DefaultProps & OwnProps
+export type IProps = DefaultProps & WantProps
 
-class XcArrow extends Component<Props> {
+class XcArrow extends Component<IProps> {
   static defaultProps: DefaultProps = {
     weight: '1px',
     color: '#dedede',
@@ -53,4 +53,5 @@ class XcArrow extends Component<Props> {
   }
 }
 
+export type Props = JSX.LibraryManagedAttributes<typeof XcArrow, XcArrow['props']>
 export default XcArrow

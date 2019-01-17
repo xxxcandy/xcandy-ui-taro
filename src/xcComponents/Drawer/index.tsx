@@ -6,31 +6,33 @@ import XcMask from '../Mask'
 
 import './index.scss'
 
+type Placement = 'top' | 'right' | 'bottom' | 'left'
+
 const placements = {
   top: 'top',
   right: 'right',
   bottom: 'bottom',
   left: 'left'
 }
-type OwnProps = {
+
+type WantProps = {
   onClickMask?: Function
 }
+
 type DefaultProps = {
   show: boolean
-  placement: string
+  placement: Placement
   mask: boolean
 }
 
-type Props = OwnProps & DefaultProps
+export type IProps = WantProps & DefaultProps
 
-const defaultProps: DefaultProps = {
-  show: false,
-  mask: true,
-  placement: 'bottom'
-}
-
-class XcDrawer extends Component<Props> {
-  static defaultProps: DefaultProps = defaultProps
+class XcDrawer extends Component<IProps> {
+  static defaultProps: DefaultProps = {
+    show: false,
+    mask: true,
+    placement: 'bottom'
+  }
 
   handleClickMask = () => {
     const { onClickMask } = this.props
@@ -58,5 +60,7 @@ class XcDrawer extends Component<Props> {
     )
   }
 }
+
+export type Props = JSX.LibraryManagedAttributes<typeof XcDrawer, XcDrawer["props"]>
 
 export default XcDrawer

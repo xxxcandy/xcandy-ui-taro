@@ -22,7 +22,7 @@ type DateHooks = {
 
 export type UseDateHooks = (date: string, hooks: DateHooks) => void
 
-type OwnProps = {
+type WantProps = {
   // event
   onSelect?(date: string[]): void
   onDateHooks?: UseDateHooks
@@ -46,9 +46,9 @@ type DefaultProps = {
   selectedDate: string[]
 }
 
-export type Props = OwnProps & DefaultProps
+export type IProps = WantProps & DefaultProps
 
-type State = Readonly<{
+type IState = Readonly<{
   renderDate: dayjs.Dayjs
   preMonthRenderArr: RenderDate[]
   currentMonthRenderArrPro: RenderDatePro[]
@@ -57,7 +57,7 @@ type State = Readonly<{
   isEndMonth: boolean
 }>
 
-class XcCalendar extends PureComponent<Props, State> {
+class XcCalendar extends PureComponent<IProps, IState> {
   static defaultProps: DefaultProps = {
     isMultiSelect: false,
     format: 'YYYY-MM-DD',
@@ -65,7 +65,7 @@ class XcCalendar extends PureComponent<Props, State> {
     selectedDate: []
   }
 
-  readonly state: State = {
+  readonly state: IState = {
     renderDate: dayjs(),
     preMonthRenderArr: [],
     nextMonthRenderArr: [],
@@ -265,5 +265,7 @@ class XcCalendar extends PureComponent<Props, State> {
     )
   }
 }
+
+export type Props = JSX.LibraryManagedAttributes<typeof XcCalendar, XcCalendar["props"]>
 
 export default XcCalendar

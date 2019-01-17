@@ -4,22 +4,18 @@ import classnames from 'classnames'
 
 import './index.scss'
 
-type OwnProps = {
+type WantProps = {
   onClickMask?: () => void
 }
-
 type DefaultProps = {
   show: boolean
 }
+type IProps = WantProps & DefaultProps
 
-type Props = OwnProps & DefaultProps
-
-const defaultProps: DefaultProps = {
-  show: false
-}
-
-class XcMask extends Component<Props> {
-  static defaultProps: DefaultProps = defaultProps
+class XcMask extends Component<IProps> {
+  static defaultProps: DefaultProps = {
+    show: false
+  }
 
   handleMaskClick = () => {
     const { onClickMask } = this.props
@@ -43,5 +39,7 @@ class XcMask extends Component<Props> {
     )
   }
 }
+
+export type Props = JSX.LibraryManagedAttributes<typeof XcMask, XcMask["props"]>
 
 export default XcMask

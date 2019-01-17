@@ -3,16 +3,12 @@ import { View } from '@tarojs/components'
 
 import './index.scss'
 
-type OwnProps = {
+export type Props = {
   onClick?: () => void
 
   arrow?: boolean
   disable?: boolean
 }
-
-type DefaultProps = {}
-
-type Props = OwnProps & DefaultProps
 
 class XcListItem extends Component<Props> {
   handleClick = () => {
