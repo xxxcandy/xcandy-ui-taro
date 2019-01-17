@@ -1,4 +1,4 @@
-import Taro, { PureComponent } from '@tarojs/taro'
+import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 
 import ComputeTransform from './computeTransform'
@@ -7,9 +7,6 @@ type OwnProps = {
   degree?: number
   offsetDegree?: number
   className?: string
-  size?: string
-  weight?: string
-  color?: string
 
   onClick?: (e: HTMLElement) => void
 }
@@ -22,23 +19,22 @@ type DefaultProps = {
 
 type Props = DefaultProps & OwnProps
 
-type State = {
-  trans: string
-}
-const defaultProps: DefaultProps = {
-  weight: '1px',
-  color: '#dedede',
-  size: '10px'
-}
-
-class XcArrow extends PureComponent<Props, State> {
-  static defaultProps: DefaultProps = defaultProps
+class XcArrow extends Component<Props> {
+  static defaultProps: DefaultProps = {
+    weight: '1px',
+    color: '#dedede',
+    size: '10px'
+  }
 
   computeTransform = new ComputeTransform()
 
   handleClick = (e) => {
     const { onClick } = this.props
     onClick && onClick(e)
+  }
+
+  shouldComponentUpdate (nextProps: Props) {
+    return Object.keys(nextProps).some(key => nextProps[key] !== this.props[key])
   }
 
   render () {
