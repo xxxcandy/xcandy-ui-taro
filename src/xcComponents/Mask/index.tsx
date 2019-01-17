@@ -26,10 +26,6 @@ class XcMask extends Component<Props> {
     onClickMask && onClickMask()
   }
 
-  catchContentClick = (e) => {
-    e.stopPropagation()
-  }
-
   render () {
     const { show } = this.props
     const maskClassNames = classnames('xc-mask', {
@@ -42,7 +38,7 @@ class XcMask extends Component<Props> {
       <View className={maskClassNames}>
         {/* interlayer 用于触发对mask区域的点击，为了避免mask在关闭的动画过程中，用户再次点击仍然触发handleMaskClick */}
         <View className={maskInterlayerClassNames} onClick={this.handleMaskClick} />
-        <View onClick={this.catchContentClick}>{this.props.children}</View>
+        {this.props.children}
       </View>
     )
   }
