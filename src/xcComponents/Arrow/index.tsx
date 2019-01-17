@@ -1,15 +1,12 @@
-import Taro, { PureComponent } from '@tarojs/taro'
+import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 
 import ComputeTransform from './computeTransform'
 
-type OwnProps = {
+type WantProps = {
   degree?: number
   offsetDegree?: number
   className?: string
-  size?: string
-  weight?: string
-  color?: string
 
   onClick?: (e: HTMLElement) => void
 }
@@ -20,25 +17,24 @@ type DefaultProps = {
   size: string
 }
 
-type Props = DefaultProps & OwnProps
+export type IProps = DefaultProps & WantProps
 
-type State = {
-  trans: string
-}
-const defaultProps: DefaultProps = {
-  weight: '1px',
-  color: '#dedede',
-  size: '10px'
-}
-
-class XcArrow extends PureComponent<Props, State> {
-  static defaultProps: DefaultProps = defaultProps
+class XcArrow extends Component<IProps> {
+  static defaultProps: DefaultProps = {
+    weight: '1px',
+    color: '#dedede',
+    size: '10px'
+  }
 
   computeTransform = new ComputeTransform()
 
   handleClick = (e) => {
     const { onClick } = this.props
     onClick && onClick(e)
+  }
+
+  shouldComponentUpdate (nextProps: Props) {
+    return Object.keys(nextProps).some(key => nextProps[key] !== this.props[key])
   }
 
   render () {
@@ -57,4 +53,5 @@ class XcArrow extends PureComponent<Props, State> {
   }
 }
 
+export type Props = JSX.LibraryManagedAttributes<typeof XcArrow, XcArrow['props']>
 export default XcArrow

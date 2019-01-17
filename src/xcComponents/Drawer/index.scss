@@ -1,43 +1,99 @@
-.xc-drawer__content {
+@import '../../styles/var.scss';
+.xc-drawer {
   position: absolute;
-  z-index: 1;
+  z-index: $drawer__z-index;
 
-  background: #fff;
+  width: 0;
+  height: 0;
+  &__content {
+    position: absolute;
 
-  transition: transform .25s;
-  transform: translate3d(0, 0, 1px);
-  &--top, &--bottom {
-    left: 0;
+    background: #fff;
 
-    width: 100%;
-  }
-  &--top {
-    bottom: 100%;
-    &--show {
-      transform: translate3d(0, 100%, 1px);
+    transition: transform .25s;
+    transform: translate(0, 0);
+    &--no-mask {
+      position: fixed !important;
+    }
+    &--top, &--bottom {
+      left: 0;
+
+      width: 100%;
+    }
+    &--top {
+      bottom: 100%;
+      &--show {
+        transform: translate(0, 100%);
+      }
+    }
+    &--bottom {
+      top: 100%;
+      &--show {
+        transform: translate(0, -100%);
+      }
+    }
+    &--right, &--left {
+      top: 0;
+
+      height: 100%;
+    }
+    &--right {
+      left: 100%;
+      &--show {
+        transform: translate(-100%, 0);
+      }
+    }
+    &--left {
+      right: 100%;
+      &--show {
+        transform: translate(100%, 0);
+      }
     }
   }
-  &--bottom {
-    top: 100%;
-    &--show {
-      transform: translate3d(0, -100%, 1px);
-    }
-  }
-  &--right, &--left {
-    top: 0;
 
-    height: 100%;
-  }
-  &--right {
-    left: 100%;
-    &--show {
-      transform: translate3d(-100%, 0, 1px);
+  &__content {
+    position: absolute;
+
+    background: #fff;
+
+    transition: transform .25s;
+    transform: translate(0, 0);
+    &--mask {
+      position: fixed;
     }
-  }
-  &--left {
-    right: 100%;
-    &--show {
-      transform: translate3d(100%, 0, 1px);
+    &--top, &--bottom {
+      left: 0;
+
+      width: 100%;
+    }
+    &--top {
+      bottom: 100%;
+      &--show {
+        transform: translate(0, 100%);
+      }
+    }
+    &--bottom {
+      top: 100%;
+      &--show {
+        transform: translate(0, -100%);
+      }
+    }
+    &--right, &--left {
+      top: 0;
+
+      height: 100%;
+    }
+    &--right {
+      left: 100%;
+      &--show {
+        transform: translate(-100%, 0);
+      }
+    }
+    &--left {
+      right: 100%;
+      &--show {
+        transform: translate(100%, 0);
+      }
     }
   }
 }

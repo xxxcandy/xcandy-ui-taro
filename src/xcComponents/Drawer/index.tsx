@@ -6,29 +6,33 @@ import XcMask from '../Mask'
 
 import './index.scss'
 
+type Placement = 'top' | 'right' | 'bottom' | 'left'
+
 const placements = {
   top: 'top',
   right: 'right',
   bottom: 'bottom',
   left: 'left'
 }
-type OwnProps = {
+
+type WantProps = {
   onClickMask?: Function
 }
+
 type DefaultProps = {
   show: boolean
-  placement: string
+  placement: Placement
+  mask: boolean
 }
 
-type Props = OwnProps & DefaultProps
+export type IProps = WantProps & DefaultProps
 
-const defaultProps: DefaultProps = {
-  show: false,
-  placement: 'bottom'
-}
-
-class XcDrawer extends Component<Props> {
-  static defaultProps: DefaultProps = defaultProps
+class XcDrawer extends Component<IProps> {
+  static defaultProps: DefaultProps = {
+    show: false,
+    mask: true,
+    placement: 'bottom'
+  }
 
   handleClickMask = () => {
     const { onClickMask } = this.props
@@ -36,18 +40,27 @@ class XcDrawer extends Component<Props> {
   }
 
   render () {
-    const { placement, show } = this.props
+    const { placement, show, mask } = this.props
 
     const placementClassName = `xc-drawer__content--${placements[placement] || placements.bottom}`
     const contentClassNames = classnames('xc-drawer__content', placementClassName, {
+      'xc-drawer__content--no-mask': !mask,
       [`${placementClassName}--show`]: show
     })
     return (
-      <XcMask show={show} onClickMask={this.handleClickMask}>
-        <View className={contentClassNames}>{this.props.children}</View>
-      </XcMask>
+      <View className='xc-drawer'>
+        {mask ? (
+          <XcMask show={show} onClickMask={this.handleClickMask}>
+            <View className={contentClassNames}>{this.props.children}</View>
+          </XcMask>
+        ) : (
+          <View className={contentClassNames}>{this.props.children}</View>
+        )}
+      </View>
     )
   }
 }
+
+export type Props = JSX.LibraryManagedAttributes<typeof XcDrawer, XcDrawer["props"]>
 
 export default XcDrawer

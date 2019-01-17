@@ -4,7 +4,7 @@ import classnames from 'classnames'
 
 import './index.scss'
 
-type Props = {
+export type Props = {
   leftIndent?: boolean
   rightIndent?: boolean
 }

@@ -3,6 +3,7 @@ import { View } from '@tarojs/components'
 
 import XcCard from '@xcComponents/Card'
 import XcDrawer from '@xcComponents/Drawer'
+import XcMask from '@xcComponents/Mask'
 
 import './index.scss'
 
@@ -15,7 +16,8 @@ class DrawerPage extends Component {
     showDrawer1: false,
     placement1: 'bottom',
     showDrawer2: false,
-    placement2: 'right'
+    placement2: 'right',
+    showDrawer3: false
   }
 
   drawerSwitch1 = (placement?: string) => {
@@ -34,8 +36,15 @@ class DrawerPage extends Component {
     })
   }
 
+  drawerSwitch3 = () => {
+    const { showDrawer3 } = this.state
+    this.setState({
+      showDrawer3: !showDrawer3
+    })
+  }
+
   render () {
-    const { showDrawer1, placement1, showDrawer2, placement2 } = this.state
+    const { showDrawer1, placement1, showDrawer2, placement2, showDrawer3 } = this.state
     return (
       <View className='page'>
         <XcCard title='基础用法'>
@@ -44,6 +53,8 @@ class DrawerPage extends Component {
 
           <View onClick={this.drawerSwitch2.bind(this, 'right')}>点击开启 - right - 点击mask区域不能关闭</View>
           <View onClick={this.drawerSwitch2.bind(this, 'left')}>点击开启 - left - 点击mask区域不能关闭</View>
+
+          <View onClick={this.drawerSwitch3}>点击开启 - right - 没有mask区域</View>
         </XcCard>
 
         <XcDrawer show={showDrawer1} onClickMask={this.drawerSwitch1} placement={placement1}>
@@ -67,6 +78,24 @@ class DrawerPage extends Component {
         <XcDrawer show={showDrawer2} placement={placement2}>
           <View className='drawer-content__2'>
             <View onClick={this.drawerSwitch2.bind(this, '')}>你可以点击这里关闭</View>
+            <View>
+              <View>content</View>
+              <View>content</View>
+              <View>content</View>
+              <View>content</View>
+              <View>content</View>
+              <View>content</View>
+              <View>content</View>
+              <View>content</View>
+              <View>content</View>
+              <View>content</View>
+            </View>
+          </View>
+        </XcDrawer>
+
+        <XcDrawer show={showDrawer3} placement='left' mask={false}>
+          <View className='drawer-content__3'>
+            <View onClick={this.drawerSwitch3}>你可以点击这里关闭</View>
             <View>
               <View>content</View>
               <View>content</View>

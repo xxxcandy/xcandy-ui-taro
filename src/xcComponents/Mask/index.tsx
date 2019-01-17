@@ -4,30 +4,22 @@ import classnames from 'classnames'
 
 import './index.scss'
 
-type OwnProps = {
+type WantProps = {
   onClickMask?: () => void
 }
-
 type DefaultProps = {
   show: boolean
 }
+type IProps = WantProps & DefaultProps
 
-type Props = OwnProps & DefaultProps
-
-const defaultProps: DefaultProps = {
-  show: false
-}
-
-class XcMask extends Component<Props> {
-  static defaultProps: DefaultProps = defaultProps
+class XcMask extends Component<IProps> {
+  static defaultProps: DefaultProps = {
+    show: false
+  }
 
   handleMaskClick = () => {
     const { onClickMask } = this.props
     onClickMask && onClickMask()
-  }
-
-  catchContentClick = (e) => {
-    e.stopPropagation()
   }
 
   render () {
@@ -42,10 +34,12 @@ class XcMask extends Component<Props> {
       <View className={maskClassNames}>
         {/* interlayer 用于触发对mask区域的点击，为了避免mask在关闭的动画过程中，用户再次点击仍然触发handleMaskClick */}
         <View className={maskInterlayerClassNames} onClick={this.handleMaskClick} />
-        <View onClick={this.catchContentClick}>{this.props.children}</View>
+        {this.props.children}
       </View>
     )
   }
 }
+
+export type Props = JSX.LibraryManagedAttributes<typeof XcMask, XcMask["props"]>
 
 export default XcMask

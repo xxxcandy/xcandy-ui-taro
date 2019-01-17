@@ -4,11 +4,9 @@ import { View } from '@tarojs/components'
 
 import './index.scss'
 
-type OwnProps = {
+export type Props = {
   title?: string
 }
-type DefaultProps = {}
-type Props = OwnProps & DefaultProps
 
 class XcCard extends Component<Props> {
   render () {
