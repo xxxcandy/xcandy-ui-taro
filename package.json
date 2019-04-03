@@ -1,6 +1,6 @@
 {
 	"name": "@xcandy/ui-taro",
-	"version": "0.0.0-development",
+	"version": "0.1.5",
 	"main": "dist/index.js",
 	"description": "A UI framework for taro.js",
 	"scripts": {
