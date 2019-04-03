@@ -59,7 +59,7 @@ const config = {
     }
   },
   h5: {
-    publicPath: '/xcandy',
+    publicPath: '/xcandy-ui-taro',
     staticDirectory: 'static',
     module: {
       postcss: {
