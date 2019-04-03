@@ -1,13 +1,13 @@
 # X-Candy
 
-[![Npm](https://img.shields.io/npm/v/xcandy.svg?style=flat-square)](https://www.npmjs.com/package/xcandy)
+[![Npm](https://img.shields.io/npm/v/@xcandy/ui-taro.svg?style=flat-square)](https://www.npmjs.com/package/@xcandy/ui-taro)
 [![Ci](https://travis-ci.org/xxxcandy/xcandy-ui-taro.svg?branch=master)](https://travis-ci.org/xxxcandy/xcandy-ui-taro)
 
 > A ui framework for taro.js
 
 ## View
 
-[https://loveonelong.github.io/xcandy](https://loveonelong.github.io/xcandy)
+[https://xxxcandy.github.io/xcandy-ui-taro](https://xxxcandy.github.io/xcandy-ui-taro)
 
 ## Usage
 
