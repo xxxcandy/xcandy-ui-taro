@@ -1,7 +1,7 @@
 # X-Candy
 
 [![Npm](https://img.shields.io/npm/v/xcandy.svg?style=flat-square)](https://www.npmjs.com/package/xcandy)
-[![Ci](https://api.travis-ci.org/loveonelong/xcandy.svg?branch=master)](https://travis-ci.org/loveonelong/xcandy)
+[![Ci](https://travis-ci.org/xxxcandy/xcandy-ui-taro.svg?branch=master)](https://travis-ci.org/xxxcandy/xcandy-ui-taro)
 
 > A ui framework for taro.js
 
