@@ -38,7 +38,7 @@ export default Demo
 
 ```
 
-> Dont forget add `esnextModules: ['xcandy']` on config if you want to build h5.
+> Dont forget add `esnextModules: ['@xcandy/ui-taro']` on config if you want to build h5.
 >
 > See: https://nervjs.github.io/taro/docs/config-detail.html#h5esnextmodules
 
