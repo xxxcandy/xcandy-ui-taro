@@ -1,9 +1,9 @@
-# X-Candy
+# XCandy UI Taro
 
 [![Npm](https://img.shields.io/npm/v/@xcandy/ui-taro.svg?style=flat-square)](https://www.npmjs.com/package/@xcandy/ui-taro)
 [![Ci](https://travis-ci.org/xxxcandy/xcandy-ui-taro.svg?branch=master)](https://travis-ci.org/xxxcandy/xcandy-ui-taro)
 
-> A ui framework for taro.js
+> A UI framework for taro.js
 
 ## View
 
@@ -14,10 +14,10 @@
 ### Install
 
 ```bash
-npm install xcandy
+npm install @xcandy/ui-taro
 ```
 
-### Use in your componet
+### Use in your Taro component
 
 ``` javascript
 import Taro, { Component } from '@tarojs/taro'
@@ -39,7 +39,9 @@ export default Demo
 
 ```
 
-> Please add `esnextModules: ['xcandy']` with config if you want build for h5.
+> Dont forget add `esnextModules: ['xcandy']` on config if you want to build h5.
+>
+> See: https://nervjs.github.io/taro/docs/config-detail.html#h5esnextmodules
 
 ## Development
 
@@ -49,7 +51,7 @@ export default Demo
 npm run ui:build
 ```
 
-### Run Dev
+### Dev command
 
 ```bash
 # h5
