@@ -22,14 +22,13 @@ npm install @xcandy/ui-taro
 ``` javascript
 import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
-
-import { XcCandy } from 'xcandy'
+import { XcCalendar } from '@xcandy/ui-taro'
 
 class Demo extends Component {
   render() {
     return (
       <View>
-        <XcCandy />
+        <XcCalendar />
       </View>
     )
   }
