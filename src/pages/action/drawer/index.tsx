@@ -3,7 +3,6 @@ import { View } from '@tarojs/components'
 
 import XcCard from '@xcComponents/Card'
 import XcDrawer from '@xcComponents/Drawer'
-import XcMask from '@xcComponents/Mask'
 
 import './index.scss'
 
@@ -20,7 +19,7 @@ class DrawerPage extends Component {
     showDrawer3: false
   }
 
-  drawerSwitch1 = (placement?: string) => {
+  drawerSwitch1 = (placement?: 'top' | 'bottom') => {
     const { showDrawer1, placement1 } = this.state
     this.setState({
       showDrawer1: !showDrawer1,
@@ -28,7 +27,7 @@ class DrawerPage extends Component {
     })
   }
 
-  drawerSwitch2 = (placement?: string) => {
+  drawerSwitch2 = (placement?: 'left' | 'right') => {
     const { showDrawer2, placement2 } = this.state
     this.setState({
       showDrawer2: !showDrawer2,
@@ -43,7 +42,7 @@ class DrawerPage extends Component {
     })
   }
 
-  render () {
+  render() {
     const { showDrawer1, placement1, showDrawer2, placement2, showDrawer3 } = this.state
     return (
       <View className='page'>

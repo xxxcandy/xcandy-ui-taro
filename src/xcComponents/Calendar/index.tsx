@@ -7,8 +7,8 @@ import XcArrow from '../Arrow'
 
 import { computePreMonthRenderArr, computeCurrenMonthRenderArr, computeNexMonthRenderArr } from './utils'
 
-import { RenderDate } from './interface'
-import RenderDatePro from './RenderDatePro'
+import { DateRender } from './interface'
+import DateRenderPro from './DateRenderPro'
 import './index.scss'
 
 type CalendarDate = Date | dayjs.Dayjs | string
@@ -49,10 +49,10 @@ type DefaultProps = {
 export type IProps = WantProps & DefaultProps
 
 type IState = Readonly<{
-  renderDate: dayjs.Dayjs
-  preMonthRenderArr: RenderDate[]
-  currentMonthRenderArrPro: RenderDatePro[]
-  nextMonthRenderArr: RenderDate[]
+  dateRender: dayjs.Dayjs
+  preMonthRenderArr: DateRender[]
+  currentMonthRenderArrPro: DateRenderPro[]
+  nextMonthRenderArr: DateRender[]
   isStartMonth: boolean
   isEndMonth: boolean
 }>
@@ -66,7 +66,7 @@ class XcCalendar extends PureComponent<IProps, IState> {
   }
 
   readonly state: IState = {
-    renderDate: dayjs(),
+    dateRender: dayjs(),
     preMonthRenderArr: [],
     nextMonthRenderArr: [],
     isStartMonth: false,
@@ -79,32 +79,32 @@ class XcCalendar extends PureComponent<IProps, IState> {
     if (currentDate) {
       this.setState(
         {
-          renderDate: dayjs(currentDate)
+          dateRender: dayjs(currentDate)
         },
-        this.renderNewMonth
+        this.genNewMonth
       )
     } else {
-      this.renderNewMonth()
+      this.genNewMonth()
     }
   }
 
   componentWillReceiveProps (nextProps: Props) {
     const { currentDate, onDateHooks } = this.props
     if (currentDate !== nextProps.currentDate || onDateHooks !== nextProps.onDateHooks) {
-      this.setState({ renderDate: dayjs(nextProps.currentDate) }, this.renderNewMonth)
+      this.setState({ dateRender: dayjs(nextProps.currentDate) }, this.genNewMonth)
     }
   }
 
-  renderNewMonth = () => {
-    const { renderDate } = this.state
+  genNewMonth = () => {
+    const { dateRender } = this.state
     const { start, end } = this.props
 
     let isStartMonth = false
     let isEndMonth = false
-    const renderDateMonthStart = renderDate.startOf('month')
-    const preMonthRenderArr = computePreMonthRenderArr(renderDate)
-    const currentMonthRenderArr = computeCurrenMonthRenderArr(renderDate)
-    const nextMonthRenderArr = this.props.currentMonthOnly ? [] : computeNexMonthRenderArr(renderDate)
+    const renderDateMonthStart = dateRender.startOf('month')
+    const preMonthRenderArr = computePreMonthRenderArr(dateRender)
+    const currentMonthRenderArr = computeCurrenMonthRenderArr(dateRender)
+    const nextMonthRenderArr = this.props.currentMonthOnly ? [] : computeNexMonthRenderArr(dateRender)
 
     start &&
       (isStartMonth = dayjs(start)
@@ -125,28 +125,28 @@ class XcCalendar extends PureComponent<IProps, IState> {
 
   clickPreMonth = () => {
     const { start } = this.props
-    const { renderDate } = this.state
-    const preMonth = renderDate.subtract(1, 'month')
+    const { dateRender } = this.state
+    const preMonth = dateRender.subtract(1, 'month')
     if (start && dayjs(start).isAfter(preMonth)) return
     this.setState(
       {
-        renderDate: preMonth
+        dateRender: preMonth
       },
-      this.renderNewMonth
+      this.genNewMonth
     )
   }
 
   clickNextMonth = () => {
     const { end } = this.props
-    const { renderDate } = this.state
-    const nextMonth = renderDate.add(1, 'month')
+    const { dateRender } = this.state
+    const nextMonth = dateRender.add(1, 'month')
     if (end && dayjs(end).isBefore(nextMonth)) return
 
     this.setState(
       {
-        renderDate: nextMonth
+        dateRender: nextMonth
       },
-      this.renderNewMonth
+      this.genNewMonth
     )
   }
 
@@ -165,9 +165,9 @@ class XcCalendar extends PureComponent<IProps, IState> {
       : _date.isBefore(dayjs(selectedDate[0]), 'day') && _date.isAfter(dayjs(selectedDate[1]), 'day')
   }
 
-  computeRenderDatePro = (renderDate: RenderDate) => {
+  computeRenderDatePro = (renderDate: DateRender) => {
     const { format, onDateHooks, start, end } = this.props
-    const renderDatePro = new RenderDatePro(renderDate)
+    const renderDatePro = new DateRenderPro(renderDate)
     const date = dayjs(renderDatePro.str)
     const dateStr = date.format(format)
 
@@ -186,9 +186,9 @@ class XcCalendar extends PureComponent<IProps, IState> {
 
   render () {
     const { themColor, currentMonthOnly } = this.props
-    const { renderDate, isStartMonth, isEndMonth } = this.state
-    const renderYear = renderDate.year()
-    const renderMonth = renderDate.month() + 1
+    const { dateRender, isStartMonth, isEndMonth } = this.state
+    const renderYear = dateRender.year()
+    const renderMonth = dateRender.month() + 1
     return (
       <View className='xc-calendar'>
         <View className='xc-calendar__title'>
