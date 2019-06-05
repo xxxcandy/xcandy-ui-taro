@@ -18,6 +18,7 @@ script:
 branches:
   only:
     - master
+    - develop
     - /^v.*$/
 
 jobs:
@@ -26,7 +27,7 @@ jobs:
       node_js: '10'
       script:
         - echo "Deploying to npm ..."
-      before_deploy: 
+      before_deploy:
         - npm run ui:ci
         - npm version $TRAVIS_TAG --no-git-tag-version
       deploy:
