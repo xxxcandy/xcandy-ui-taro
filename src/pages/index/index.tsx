@@ -1,4 +1,4 @@
-import Taro, { Component, Config } from '@tarojs/taro'
+import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 
 import XcCard from '@xcComponents/Card'
@@ -45,7 +45,7 @@ const routes = [
 ]
 
 export default class Index extends Component {
-  config: Config = {
+  config: Taro.Config = {
     navigationBarTitleText: '首页'
   }
 

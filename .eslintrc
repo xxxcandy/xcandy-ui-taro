@@ -1,53 +1,16 @@
 {
   "extends": ["taro"],
-  "parser": "babel-eslint",
-  "env": {
-    "jest": true
-  },
   "rules": {
-    "class-methods-use-this": "off",
-    "prefer-rest-params": "off",
-    "arrow-body-style": "warn",
-    "taro/custom-component-children": "off",
-    "no-unused-vars": ["error", { "varsIgnorePattern": "Taro" }],
-    "import/prefer-default-export": "off",
-    "lines-between-class-members": "error",
-    "space-before-function-paren": "error",
-    "arrow-parens": ["error", "as-needed", { "requireForBlockBody": true }]
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["on", { "argsIgnorePattern": "^_", "varsIgnorePattern": "Taro" }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".tsx"] }]
   },
-  "overrides": [
-    {
-      "files": ["build/*.js"],
-      "rules": {
-        "import/no-commonjs": "off"
-      }
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    {
-      "files": ["src/components/**/*.test.js", "src/components/**/test.js"],
-      "rules": {
-        "taro/no-stateless-component": "off",
-        "react/react-in-jsx-scope": "off",
-        "react/no-find-dom-node": "off",
-        "no-unused-vars": ["error", { "varsIgnorePattern": "Nerv" }]
-      }
-    },
-    {
-      "files": ["**/*.ts", "**/*.tsx"],
-      "parser": "typescript-eslint-parser",
-      "plugins": ["react", "typescript"],
-      "env": {
-        "jest": true
-      },
-      "rules": {
-        "no-undef": 0,
-        "no-unused-vars": 0,
-        "typescript/class-name-casing": 2,
-        "class-methods-use-this": "off",
-        "prefer-rest-params": "off",
-        "arrow-body-style": "warn",
-        "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
-        "taro/custom-component-children": "off"
-      }
-    }
-  ]
+    "useJSXTextNode": true,
+    "project": "./tsconfig.json"
+  }
 }
