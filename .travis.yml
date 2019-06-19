@@ -23,7 +23,8 @@ branches:
 
 jobs:
   include:
-    - stage: npm release
+    - if: tag =~ ^v.*
+      stage: npm release
       node_js: '10'
       script:
         - echo "Deploying to npm ..."
@@ -40,7 +41,8 @@ jobs:
           tags: true
           all_branches: true
         tag: latest
-    - stage: git page
+    - if: tag =~ ^v.*
+      stage: git page
       node_js: '10'
       script:
         - if [ "$TRAVIS_BRANCH" == "master" ] && [ "${TRAVIS_PULL_REQUEST}" == "false" ]; then
