@@ -2,7 +2,7 @@ import Taro from '@tarojs/taro'
 import { View } from '@tarojs/components'
 
 import XcMask from '@xcComponents/Mask'
-import XcCard from '@xcComponents/Card'
+import Card from '@components/Card'
 
 import './index.scss'
 
@@ -34,10 +34,10 @@ class MaskPage extends Taro.Component {
     const { show1, show2 } = this.state
     return (
       <View className='page mask-page'>
-        <XcCard title='基础用法'>
+        <Card title='基础用法'>
           <View onClick={this.maskSwitch1}>点击mask区域可以关闭</View>
           <View onClick={this.maskSwitch2}>点击mask区域不可关闭</View>
-        </XcCard>
+        </Card>
         <XcMask show={show1} onClickMask={this.maskSwitch1} />
         <XcMask show={show2}>
           <View className='mask-content' onClick={this.maskSwitch2}>

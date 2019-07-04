@@ -1,31 +1,45 @@
-@import '../../styles/var.scss';
+@import "../../styles/var.scss";
 .xc-mask {
-  visibility: hidden;
   position: fixed;
-  z-index: $mask__z-index;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
+  z-index: $mask__z-index;
 
-  background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(255, 255, 255, 0);
+  visibility: hidden;
 
-  transition: visibility $mask__transition-duration, background-color $mask__transition-duration;
+  transition-duration: $mask__transition-duration;
+  transition-property: visibility, background-color;
+
   &--show {
-    visibility: visible;
-
     background-color: rgba(0, 0, 0, $mask__opacity);
+    visibility: visible;
   }
   &__interlayer {
-    visibility: hidden;
     position: absolute;
-    z-index: -1;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
+    z-index: -1;
+
+    visibility: hidden;
     &--show {
       visibility: visible;
+
+      animation: xc-mask-interlayer-await-animation $mask__transition-duration;
     }
+  }
+}
+
+// 防止在展示的动画过程中用户点击导致的关闭
+@keyframes xc-mask-interlayer-await-animation {
+  0% {
+    top: auto;
+  }
+  100% {
+    top: auto;
   }
 }

@@ -2,24 +2,22 @@
   background: #fff;
   &__title {
     display: flex;
-
     justify-content: space-between;
     align-items: center;
 
-    font-size: 28px;
     font-weight: bold;
+    font-size: 28px;
     line-height: 1.4;
   }
   &__month-switch {
-    overflow: hidden;
-
     width: 68px;
     height: 42px;
     margin: 0 (100%/7/2);
+    overflow: hidden;
+
     border-radius: 4px;
     &__button {
       display: flex;
-
       justify-content: center;
       align-items: center;
 
@@ -32,10 +30,10 @@
   &__content {
     margin-top: 30px;
   }
-  &__week, &__dates {
-    overflow: hidden;
-
+  &__week,
+  &__dates {
     margin-top: 20px;
+    overflow: hidden;
 
     font-size: 24px;
     line-height: 30px;
@@ -44,11 +42,10 @@
     font-weight: bold;
     &__day {
       display: flex;
-      float: left;
-
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      float: left;
 
       box-sizing: border-box;
       width: (100% / 7);
@@ -56,14 +53,14 @@
     }
   }
   &__date {
-    display: flex;
     position: relative;
     z-index: 1;
-    float: left;
 
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    float: left;
 
     box-sizing: border-box;
     width: (100% / 7);
@@ -77,30 +74,27 @@
       font-size: 22px;
     }
     &--disable {
-      opacity: .3;
-
       cursor: not-allowed;
+      opacity: 0.3;
     }
     &--other-month {
-      opacity: .1;
-
       cursor: auto;
+      opacity: 0.1;
     }
     &--selected {
       color: #fff;
     }
     &__bg--selected {
       position: absolute;
-      z-index: -1;
       top: 50%;
       left: 50%;
+      z-index: -1;
 
       width: 68px;
       height: 70px;
-      border-radius: 50%;
 
       background-color: #0056ff;
-
+      border-radius: 50%;
       transform: translate(-50%, -50%);
     }
   }

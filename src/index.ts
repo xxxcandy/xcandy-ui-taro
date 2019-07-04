@@ -2,8 +2,7 @@
 export { default as XcMask } from './xcComponents/Mask'
 
 /* layout */
-export { default as XcCard } from './xcComponents/Card'
-export { default as XcList } from './xcComponents/List'
+export { default as XcList } from './xcComponents/Group'
 export { default as XcListItem } from './xcComponents/ListItem'
 export { default as XcArrow } from './xcComponents/Arrow'
 

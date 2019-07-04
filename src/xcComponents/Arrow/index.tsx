@@ -1,57 +1,51 @@
-import Taro, { Component } from '@tarojs/taro'
+import Taro, { useState, useEffect, useCallback } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 
 import ComputeTransform from './computeTransform'
 
-type WantProps = {
+const defaultProps = {
+  weight: '1px',
+  color: '#999',
+  size: '8px',
+  degree: 90
+}
+
+export type Props = {
+  weight?: string
+  color?: string
+  size?: string
   degree?: number
   offsetDegree?: number
   className?: string
 
-  onClick?: (e: HTMLElement) => void
+  onClick?: () => void
+} & typeof defaultProps
+
+const XcArrow = function(props: Props) {
+  const { className, color, size, weight, degree, offsetDegree, onClick } = props
+  const [computeTransform] = useState(new ComputeTransform())
+  const [trans, setTrans] = useState('')
+
+  useEffect(() => {
+    setTrans(computeTransform.compute({ degree, offsetDegree }))
+  }, [degree, offsetDegree])
+
+  const handleClick = useCallback(() => {
+    onClick && onClick()
+  }, [onClick])
+
+  const finalStyle = {
+    borderStyle: 'solid',
+    borderColor: color,
+    borderWidth: `${weight} ${weight} 0 0`,
+    width: size,
+    height: size,
+    transform: trans,
+    margin: `${size}` // 为了解决css实现的箭头旋转后超出原本在文档流中的位置
+  }
+
+  return <View style={finalStyle} className={className} onClick={handleClick} />
 }
+XcArrow.defaultProps = defaultProps
 
-type DefaultProps = {
-  weight: string
-  color: string
-  size: string
-}
-
-export type IProps = DefaultProps & WantProps
-
-class XcArrow extends Component<IProps> {
-  static defaultProps: DefaultProps = {
-    weight: '1px',
-    color: '#dedede',
-    size: '10px'
-  }
-
-  computeTransform = new ComputeTransform()
-
-  handleClick = (e) => {
-    const { onClick } = this.props
-    onClick && onClick(e)
-  }
-
-  shouldComponentUpdate (nextProps: Props) {
-    return Object.keys(nextProps).some(key => nextProps[key] !== this.props[key])
-  }
-
-  render () {
-    const { className, color, size, weight, degree, offsetDegree } = this.props
-    const trans = this.computeTransform.compute({ degree: degree || degree === 0 ? degree : 90, offsetDegree })
-    const finalStyle = {
-      borderStyle: 'solid',
-      borderTopColor: color,
-      borderRightColor: color,
-      borderWidth: `${weight} ${weight} 0 0`,
-      width: size,
-      height: size,
-      transform: trans
-    }
-    return <View style={finalStyle} className={className} />
-  }
-}
-
-export type Props = JSX.LibraryManagedAttributes<typeof XcArrow, XcArrow['props']>
-export default XcArrow
+export default Taro.memo(XcArrow)
