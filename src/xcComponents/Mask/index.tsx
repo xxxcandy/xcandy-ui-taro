@@ -17,7 +17,7 @@ type Props = {
   children?: any
 } & typeof defaultProps
 
-const XcMask = function(props: Props) {
+const XcMask = (props: Props) => {
   const { show, maskBackgroundColor, onClickMask, children } = props
   const [maskClassnames, setMaskClassnames] = useState('xc-mask')
   const [maskInterlayerClassnames, setMaskInterlayerClassnames] = useState('xc-mask__interlayer')

@@ -10,7 +10,7 @@ export type Props = {
   children?: any
 }
 
-const XcGroup = function(props: Props) {
+const XcGroup = (props: Props) => {
   const { leftIndent, rightIndent } = props
   const [groupClassnames, setGroupClassnames] = useState('xc-group')
 

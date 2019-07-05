@@ -15,7 +15,7 @@ export type Props = {
   children?: any
 }
 
-const XcListItem = function(props: Props) {
+const XcListItem = (props: Props) => {
   const { disable, onClick, border, borderColor, children, renderAction } = props
   const [borderStyle, setBorderStyle] = useState<string | { [key: string]: any }>('')
 

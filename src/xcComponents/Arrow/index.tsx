@@ -21,7 +21,7 @@ export type Props = {
   onClick?: () => void
 } & typeof defaultProps
 
-const XcArrow = function(props: Props) {
+const XcArrow = (props: Props) => {
   const { className, color, size, weight, degree, offsetDegree, onClick } = props
   const [computeTransform] = useState(new ComputeTransform())
   const [trans, setTrans] = useState('')

@@ -9,7 +9,7 @@ export type Props = {
   children: any
 }
 
-const Card = function(props: Props) {
+const Card = (props: Props) => {
   const { title, children } = props
   return (
     <View className='card'>

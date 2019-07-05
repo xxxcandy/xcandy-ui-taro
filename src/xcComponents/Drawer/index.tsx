@@ -29,7 +29,7 @@ export type Props = {
   children?: any
 } & typeof defaultProps
 
-const XcDrawer = function(props: Props) {
+const XcDrawer = (props: Props) => {
   const { show, placement, withoutMask, onClickMask, children } = props
   const [maskClassnames, setMaskClassnames] = useState('xc-drawer')
   const [contentClassnames, setContentClassnames] = useState('xc-drawer__content')
