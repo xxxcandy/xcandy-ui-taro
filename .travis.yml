@@ -2,10 +2,9 @@ language: node_js
 
 node_js:
   - '10'
-  - '8'
 
 install:
-  - npm install -g @tarojs/cli
+  - npm install -g @tarojs/cli@latest
   - npm install
 
 script:
@@ -14,6 +13,10 @@ script:
   - npm run ui:ci
   - npm run build:h5
   - npm run build:weapp
+  - npm run build:swan
+  - npm run build:tt
+  - npm run build:alipay
+  - npm run build:qq
 
 branches:
   only:

@@ -2,7 +2,7 @@ import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import dayjs from 'dayjs'
 
-import XcCard from '@xcComponents/Card'
+import Card from '@components/Card'
 import XcCalendar, { UseDateHooks } from '@xcComponents/Calendar'
 
 const format = 'YYYY/MM/DD'
@@ -44,12 +44,12 @@ class CalendarPage extends Component {
   render () {
     return (
       <View className='page'>
-        <XcCard title='基础展示'>
+        <Card title='基础展示'>
           <View>默认无选中，只允许单选</View>
           <View>当前选中 {this.state.calendarSelected_1[0] || '无'}</View>
           <XcCalendar onSelect={this.select1} selectedDate={this.state.calendarSelected_1} />
-        </XcCard>
-        <XcCard title='高级用法'>
+        </Card>
+        <Card title='高级用法'>
           <View>不显示前后月</View>
           <View>格式化为`YYYY/MM/DD`</View>
           <View>将周末设置为不可被选中,并设置备注</View>
@@ -69,7 +69,7 @@ class CalendarPage extends Component {
             currentMonthOnly
             themColor='red'
           />
-        </XcCard>
+        </Card>
       </View>
     )
   }

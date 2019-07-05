@@ -1,17 +1,16 @@
-@import './var.scss';
+@import "./var.scss";
 @mixin section {
-  overflow: hidden;
-
   margin-top: $section__margin-top;
   padding: $section__padding;
-  border-radius: $section__padding;
+  overflow: hidden;
 
   background-color: $section__background-color;
+  border-radius: $section__padding;
 }
 
 @mixin section-title {
   margin-bottom: $section-title__margin-bottom;
 
-  font-size: $section-title__font-size;
   font-weight: $section-title__font-weight;
+  font-size: $section-title__font-size;
 }

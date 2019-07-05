@@ -1,9 +1,10 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 
-import XcCard from '@xcComponents/Card'
-import XcList from '@xcComponents/List'
+import Card from '@components/Card'
+import XcGroup from '@xcComponents/Group'
 import XcListItem from '@xcComponents/ListItem'
+import XcArrow from '@xcComponents/Arrow'
 
 const routes = [
   {
@@ -55,19 +56,23 @@ export default class Index extends Component {
     })
   }
 
-  render () {
+  render() {
     return (
       <View className='page'>
         {routes.map(kind => (
-          <XcCard key={kind.name} title={kind.name}>
-            <XcList>
+          <Card key={kind.name} title={kind.name}>
+            <XcGroup>
               {kind.pages.map(component => (
-                <XcListItem arrow key={component.name} onClick={this.viewComponent.bind(this, component.url)}>
+                <XcListItem
+                  key={component.name}
+                  onClick={this.viewComponent.bind(this, component.url)}
+                  renderAction={<XcArrow />}
+                >
                   <View>{component.name}</View>
                 </XcListItem>
               ))}
-            </XcList>
-          </XcCard>
+            </XcGroup>
+          </Card>
         ))}
       </View>
     )
