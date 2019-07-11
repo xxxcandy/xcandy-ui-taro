@@ -1,6 +1,6 @@
 @import '../../styles/mixin.scss';
 @import '../../styles/var.scss';
-.xc-card {
+.card {
   @include section;
   &__title {
     @include section-title;

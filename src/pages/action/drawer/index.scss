@@ -1,5 +1,9 @@
 .drawer-content {
-  &__2, &__3 {
+  background: #fff;
+
+  &-2,
+  &-3 {
+    height: 100%;
     width: 30vw;
   }
 }

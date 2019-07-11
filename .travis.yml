@@ -2,10 +2,9 @@ language: node_js
 
 node_js:
   - '10'
-  - '8'
-
+  - '12'
 install:
-  - npm install -g @tarojs/cli
+  - npm install -g @tarojs/cli@latest
   - npm install
 
 script:
@@ -14,19 +13,25 @@ script:
   - npm run ui:ci
   - npm run build:h5
   - npm run build:weapp
+  - npm run build:swan
+  - npm run build:tt
+  - npm run build:alipay
+  - npm run build:qq
 
 branches:
   only:
     - master
+    - develop
     - /^v.*$/
 
 jobs:
   include:
-    - stage: npm release
+    - if: tag =~ ^v.*
+      stage: npm release
       node_js: '10'
       script:
         - echo "Deploying to npm ..."
-      before_deploy: 
+      before_deploy:
         - npm run ui:ci
         - npm version $TRAVIS_TAG --no-git-tag-version
       deploy:
@@ -39,7 +44,8 @@ jobs:
           tags: true
           all_branches: true
         tag: latest
-    - stage: git page
+    - if: tag =~ ^v.*
+      stage: git page
       node_js: '10'
       script:
         - if [ "$TRAVIS_BRANCH" == "master" ] && [ "${TRAVIS_PULL_REQUEST}" == "false" ]; then

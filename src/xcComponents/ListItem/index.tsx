@@ -1,4 +1,4 @@
-import Taro, { Component } from '@tarojs/taro'
+import Taro, { useState, useEffect, useCallback } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 
 import './index.scss'
@@ -8,33 +8,36 @@ export type Props = {
 
   arrow?: boolean
   disable?: boolean
+  border?: boolean
+  borderColor?: string
+
+  renderAction?: any
+  children?: any
 }
 
-class XcListItem extends Component<Props> {
-  handleClick = () => {
-    const { onClick, disable } = this.props
-    !disable && onClick && onClick()
-  }
+const XcListItem = (props: Props) => {
+  const { disable, onClick, border, borderColor, children, renderAction } = props
+  const [borderStyle, setBorderStyle] = useState<string | { [key: string]: any }>('')
 
-  render () {
-    const { arrow } = this.props
-    const arrowStyle = {
-      transform: `rotate(45deg)`
-    }
-    return (
-      <View className='xc-list-item' onClick={this.handleClick}>
-        <View className='xc-list-item__wrap'>
-          <View className='xc-list-item__content'>{this.props.children}</View>
-          {arrow && (
-            <View className='xc-list-item__action'>
-              <View className='xc-list-item__arrow' style={arrowStyle} />
-            </View>
-          )}
-          <View className='xc-list-item__border' />
-        </View>
+  const handleClick = useCallback(() => {
+    !disable && onClick && onClick()
+  }, [disable, onClick])
+
+  useEffect(() => {
+    setBorderStyle({
+      'border-color': borderColor
+    })
+  }, [borderColor])
+
+  return (
+    <View className='xc-list-item' onClick={handleClick}>
+      <View className='xc-list-item__wrap'>
+        <View className='xc-list-item__content'>{children}</View>
+        <View className='xc-list-item__action'>{renderAction}</View>
+        {border && <View className='xc-list-item__border' style={borderStyle} />}
       </View>
-    )
-  }
+    </View>
+  )
 }
 
 export default XcListItem

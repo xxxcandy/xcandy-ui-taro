@@ -6,7 +6,6 @@
     "preserveConstEnums": true,
     "moduleResolution": "node",
     "experimentalDecorators": true,
-    "jsxFactory": "Taro.createElement",
     "noImplicitAny": false,
     "allowSyntheticDefaultImports": true,
     "outDir": "lib",
@@ -17,6 +16,9 @@
     "baseUrl": ".",
     "rootDir": ".",
     "jsx": "preserve",
+    "jsxFactory": "Taro.createElement",
+    "allowJs": true,
+    "resolveJsonModule": true,
     "typeRoots": ["node_modules/@types", "global.d.ts"],
     "paths": {
       "@components/*": ["./src/components/*"],
@@ -24,5 +26,9 @@
       "@myComponents/*": ["./src/myComponents/*"]
     }
   },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
   "compileOnSave": false
 }

@@ -10,10 +10,10 @@ import { Props as MaskProps } from '../src/xcComponents/Mask'
 
 declare const XcArrow: ComponentClass<ArrowProps>
 declare const XcCalendar: ComponentClass<CalendarProps>
-declare const XcCard: ComponentClass<CardProps>
+declare const Card: ComponentClass<CardProps>
 declare const XcDrawer: ComponentClass<DrawerProps>
 declare const XcList: ComponentClass<ListProps>
 declare const XcListItem: ComponentClass<ListItemProps>
 declare const XcMask: ComponentClass<MaskProps>
 
-export { XcArrow, XcCalendar, XcCard, XcDrawer, XcList, XcListItem, XcMask }
+export { XcArrow, XcCalendar, Card, XcDrawer, XcList, XcListItem, XcMask }

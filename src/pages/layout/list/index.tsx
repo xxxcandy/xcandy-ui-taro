@@ -1,36 +1,37 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 
-import XcList from '@xcComponents/List'
+import XcGroup from '@xcComponents/Group'
 import XcListItem from '@xcComponents/ListItem'
-import XcCard from '@xcComponents/Card'
+import XcArrow from '@xcComponents/Arrow'
+import Card from '@components/Card'
 
 class ListPage extends Component {
-  render () {
+  render() {
     return (
       <View className='page'>
-        <XcCard title='基础'>
-          <XcList leftIndent>
-            <XcListItem arrow>带箭头</XcListItem>
-          </XcList>
-        </XcCard>
-        <XcCard title='嵌套'>
-          <XcList leftIndent>
+        <Card title='基础'>
+          <XcGroup leftIndent>
+            <XcListItem renderAction={<XcArrow />}>带箭头</XcListItem>
+          </XcGroup>
+        </Card>
+        <Card title='嵌套'>
+          <XcGroup leftIndent>
             <XcListItem>1</XcListItem>
             <XcListItem>2</XcListItem>
             <XcListItem>
-              <XcList leftIndent>
+              <XcGroup leftIndent>
                 <XcListItem>1</XcListItem>
                 <XcListItem>2</XcListItem>
                 <XcListItem>3</XcListItem>
                 <XcListItem>4</XcListItem>
                 <XcListItem>5</XcListItem>
-              </XcList>
+              </XcGroup>
             </XcListItem>
             <XcListItem>4</XcListItem>
             <XcListItem>5</XcListItem>
-          </XcList>
-        </XcCard>
+          </XcGroup>
+        </Card>
       </View>
     )
   }

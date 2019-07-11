@@ -1,0 +1,16 @@
+@import '../../styles/mixin.scss';
+.xc-group {
+  position: relative;
+
+  box-sizing: border-box;
+  width: 100%;
+  overflow: hidden;
+  &--indent {
+    &-left {
+      padding-left: 20px;
+    }
+    &-right {
+      padding-right: 20px;
+    }
+  }
+}
