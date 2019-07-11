@@ -1,7 +1,6 @@
 language: node_js
 
 node_js:
-  - '10'
   - '12'
 install:
   - npm install -g @tarojs/cli@latest
@@ -28,7 +27,7 @@ jobs:
   include:
     - if: tag =~ ^v.*
       stage: npm release
-      node_js: '10'
+      node_js: '12'
       script:
         - echo "Deploying to npm ..."
       before_deploy:
@@ -46,7 +45,7 @@ jobs:
         tag: latest
     - if: tag =~ ^v.*
       stage: git page
-      node_js: '10'
+      node_js: '12'
       script:
         - if [ "$TRAVIS_BRANCH" == "master" ] && [ "${TRAVIS_PULL_REQUEST}" == "false" ]; then
           npm run update:site;
