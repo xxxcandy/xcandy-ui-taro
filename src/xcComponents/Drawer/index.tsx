@@ -17,14 +17,14 @@ const placements = {
 
 const defaultProps = {
   show: false,
-  placement: 'top',
+  placement: 'bottom',
   withoutMask: false
 }
 
 export type Props = {
   show?: boolean
   placement?: Placement
-  withoutMask: boolean
+  withoutMask?: boolean
   onClickMask?: () => void
   children?: any
 } & typeof defaultProps
