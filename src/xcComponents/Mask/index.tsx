@@ -10,7 +10,7 @@ const defaultProps = {
   animationDuration: ''
 }
 
-type Props = {
+export type Props = {
   show: boolean
   maskBackgroundColor?: string
   onClickMask?: () => void
