@@ -7,6 +7,7 @@ export { default as XcListItem } from './xcComponents/ListItem'
 export { default as XcArrow } from './xcComponents/Arrow'
 
 /* action */
+export { default as XcInfiniteScroller } from './xcComponents/InfiniteScroller'
 export { default as XcDrawer } from './xcComponents/Drawer'
 
 /* other */
