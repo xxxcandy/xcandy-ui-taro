@@ -33,7 +33,7 @@ const XcListItem = (props: Props) => {
     <View className='xc-list-item' onClick={handleClick}>
       <View className='xc-list-item__wrap'>
         <View className='xc-list-item__content'>{children}</View>
-        <View className='xc-list-item__action'>{renderAction}</View>
+        <View className='xc-list-item__actions'>{renderAction}</View>
         {border && <View className='xc-list-item__border' style={borderStyle} />}
       </View>
     </View>

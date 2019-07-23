@@ -1,0 +1,25 @@
+.page-home {
+  .header {
+    margin: 50PX 0 30PX;
+
+    font-weight: bold;
+    font-size: 32PX;
+    text-align: center;
+  }
+  .badges {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &__item {
+      width: auto;
+      height: 18PX;
+      margin-right: 10PX;
+    }
+  }
+  .components {
+    margin-top: 20PX;
+    .list-item{
+      padding: 10PX 0;
+    }
+  }
+}

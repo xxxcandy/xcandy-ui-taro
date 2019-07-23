@@ -1,0 +1,13 @@
+.comopnent-docs-link {
+  margin-top: 20PX;
+
+  &__title {
+    margin-right: 10PX;
+
+    font-weight: bold;
+  }
+  &__link {
+    color: #0a5cf6;
+    text-decoration: underline;
+  }
+}

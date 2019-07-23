@@ -69,10 +69,7 @@ const InfiniteScroller = (props: Props) => {
     fetchData()
   }, [fetchData])
 
-  // init
   useEffect(() => {
-    // TODO:
-    // ! 这里执行了两次，需要检查原因
     fetchData()
   }, [])
 

@@ -12,6 +12,7 @@ class App extends Component {
     pages: [
       'pages/index/index',
       'pages/layout/list/index',
+      'pages/layout/group/index',
       'pages/action/drawer/index',
       'pages/calendar/index',
       'pages/atomic/mask/index'

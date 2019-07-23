@@ -1,8 +1,18 @@
-@import '../../styles/mixin.scss';
-@import '../../styles/var.scss';
+@import "../../styles/var.scss";
+
 .card {
-  @include section;
+  margin-top: 20PX;
+  padding: 20PX 10PX 10PX;
+  overflow: hidden;
+
+  font-size: 14PX;
+
+  background-color: #fff;
+  border-radius: $border-radius-middle;
   &__title {
-    @include section-title;
+    margin-bottom: 20px;
+
+    font-weight: bold;
+    font-size: 16PX;
   }
 }
