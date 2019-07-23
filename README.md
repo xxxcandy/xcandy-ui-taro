@@ -28,6 +28,12 @@ TaroJs 官方提供了 TaroUI，已经能满足部分开发者的需求。但是
 
 [https://xxxcandy.github.io/xcandy-ui-taro](https://xxxcandy.github.io/xcandy-ui-taro)
 
+## Docs
+
+没有 Docs，哈哈哈，由于比较偷懒，所有的 Docs 都放在相应的各自组件下的`README.md`中。案例网站上也有链接可以点击访问到哦。
+
+请查看`src/xcComponents/`中所有的组件目录。
+
 ## Who use it
 
 - [口袋故事(工程师爸爸)](https://koudaistory.com)
