@@ -41,7 +41,7 @@ class CalendarPage extends Component {
     }
   }
 
-  render () {
+  render() {
     return (
       <View className='page'>
         <Card title='基础展示'>

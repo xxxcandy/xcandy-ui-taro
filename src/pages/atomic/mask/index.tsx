@@ -30,7 +30,7 @@ class MaskPage extends Taro.Component {
     })
   }
 
-  render () {
+  render() {
     const { show1, show2 } = this.state
     return (
       <View className='page mask-page'>
@@ -38,7 +38,7 @@ class MaskPage extends Taro.Component {
           <View onClick={this.maskSwitch1}>点击mask区域可以关闭</View>
           <View onClick={this.maskSwitch2}>点击mask区域不可关闭</View>
         </Card>
-        <XcMask show={show1} onClickMask={this.maskSwitch1} />
+        <XcMask show={show1} onClick={this.maskSwitch1} />
         <XcMask show={show2}>
           <View className='mask-content' onClick={this.maskSwitch2}>
             点我才可以关闭哦

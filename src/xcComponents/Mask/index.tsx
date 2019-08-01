@@ -1,6 +1,7 @@
-import Taro, { useCallback, useState, useEffect } from '@tarojs/taro'
+import Taro, { useCallback, useMemo } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import classnames from 'classnames'
+import { isFunction } from '@utils/utils'
 
 import './index.scss'
 
@@ -13,43 +14,35 @@ const defaultProps = {
 export type Props = {
   show: boolean
   maskBackgroundColor?: string
-  onClickMask?: () => void
   children?: any
-} & typeof defaultProps
+} & typeof defaultProps &
+  XcCommonProps
 
 const XcMask = (props: Props) => {
-  const { show, maskBackgroundColor, onClickMask, children } = props
-  const [maskClassnames, setMaskClassnames] = useState('xc-mask')
-  const [maskInterlayerClassnames, setMaskInterlayerClassnames] = useState('xc-mask__interlayer')
-  const [maskStyle, setMaskStyle] = useState<string | { [key: string]: any }>('')
+  const { show, maskBackgroundColor, onClick, children } = props
 
-  useEffect(() => {
-    setMaskStyle({
-      'background-color': show ? maskBackgroundColor : ''
-    })
+  const maskStyle = useMemo(() => {
+    return {
+      backgroundColor: show ? maskBackgroundColor : ''
+    }
   }, [maskBackgroundColor, show])
 
-  useEffect(() => {
-    setMaskClassnames(
-      classnames('xc-mask', {
-        'xc-mask--show': show
-      })
-    )
-    setMaskInterlayerClassnames(
-      classnames('xc-mask__interlayer', {
-        'xc-mask__interlayer--show': show
-      })
-    )
-  }, [show])
+  const maskClassnames = classnames('xc-mask', {
+    'xc-mask--show': show
+  })
 
-  const handleMaskClick = useCallback(() => {
-    onClickMask && onClickMask()
-  }, [onClickMask])
+  const maskInterlayerClassnames = classnames('xc-mask__interlayer', {
+    'xc-mask__interlayer--show': show
+  })
+
+  const clickHandler = useCallback(() => {
+    isFunction(onClick) && onClick!()
+  }, [onClick])
 
   return (
     <View className={maskClassnames} style={maskStyle}>
       {/* interlayer 用于触发对mask区域的点击，为了避免mask在关闭的动画过程中，用户再次点击仍然触发handleMaskClick */}
-      <View className={maskInterlayerClassnames} onClick={handleMaskClick} />
+      <View className={maskInterlayerClassnames} onClick={clickHandler} />
       {children}
     </View>
   )

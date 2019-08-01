@@ -74,7 +74,7 @@ class XcCalendar extends PureComponent<IProps, IState> {
     currentMonthRenderArrPro: []
   }
 
-  componentDidMount () {
+  componentDidMount() {
     const { currentDate } = this.props
     if (currentDate) {
       this.setState(
@@ -88,7 +88,7 @@ class XcCalendar extends PureComponent<IProps, IState> {
     }
   }
 
-  componentWillReceiveProps (nextProps: Props) {
+  componentWillReceiveProps(nextProps: Props) {
     const { currentDate, onDateHooks } = this.props
     if (currentDate !== nextProps.currentDate || onDateHooks !== nextProps.onDateHooks) {
       this.setState({ dateRender: dayjs(nextProps.currentDate) }, this.genNewMonth)
@@ -184,7 +184,7 @@ class XcCalendar extends PureComponent<IProps, IState> {
     return renderDatePro
   }
 
-  render () {
+  render() {
     const { themColor, currentMonthOnly } = this.props
     const { dateRender, isStartMonth, isEndMonth } = this.state
     const renderYear = dateRender.year()
@@ -266,6 +266,6 @@ class XcCalendar extends PureComponent<IProps, IState> {
   }
 }
 
-export type Props = JSX.LibraryManagedAttributes<typeof XcCalendar, XcCalendar["props"]>
+export type Props = JSX.LibraryManagedAttributes<typeof XcCalendar, XcCalendar['props']>
 
 export default XcCalendar

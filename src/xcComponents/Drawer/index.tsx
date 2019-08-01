@@ -1,7 +1,8 @@
-import Taro, { useState, useEffect, useCallback } from '@tarojs/taro'
+import Taro, { useCallback } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import classnames from 'classnames'
 
+import './'
 import XcMask from '../Mask'
 
 import './index.scss'
@@ -27,31 +28,25 @@ export type Props = {
   withoutMask?: boolean
   onClickMask?: () => void
   children?: any
-} & typeof defaultProps
+} & typeof defaultProps &
+  XcCommonProps
 
 const XcDrawer = (props: Props) => {
   const { show, placement, withoutMask, onClickMask, children } = props
-  const [maskClassnames, setMaskClassnames] = useState('xc-drawer')
-  const [contentClassnames, setContentClassnames] = useState('xc-drawer__content')
 
-  useEffect(() => {
-    setMaskClassnames(
-      classnames('xc-drawer', {
-        'xc-drawer--show': show
-      })
-    )
-  }, [show])
+  const maskClassnames = classnames('xc-drawer', {
+    'xc-drawer--show': show
+  })
 
-  useEffect(() => {
-    const placementClassnames = `xc-drawer__content--${placements[placement] || placements.bottom}`
-    setContentClassnames(
-      classnames('xc-drawer__content', placementClassnames, {
-        'xc-drawer__content--no-mask': !withoutMask
-      })
-    )
-  }, [placement, withoutMask])
+  const contentClassnames = classnames(
+    'xc-drawer__content',
+    `xc-drawer__content--${placements[placement] || placements.bottom}`,
+    {
+      'xc-drawer__content--no-mask': !withoutMask
+    }
+  )
 
-  const handleClickMask = useCallback(() => {
+  const maskClickHandler = useCallback(() => {
     onClickMask && onClickMask()
   }, [onClickMask])
 
@@ -60,7 +55,7 @@ const XcDrawer = (props: Props) => {
       {withoutMask ? (
         <View className={contentClassnames}>{children}</View>
       ) : (
-        <XcMask show={show} onClickMask={handleClickMask}>
+        <XcMask show={show} onClick={maskClickHandler}>
           <View className={contentClassnames}>{children}</View>
         </XcMask>
       )}

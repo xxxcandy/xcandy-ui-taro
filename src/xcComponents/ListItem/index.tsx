@@ -1,11 +1,11 @@
-import Taro, { useState, useEffect, useCallback } from '@tarojs/taro'
+import Taro, { useMemo, useCallback } from '@tarojs/taro'
 import { View } from '@tarojs/components'
+
+import { isFunction } from '@utils/utils'
 
 import './index.scss'
 
 export type Props = {
-  onClick?: () => void
-
   arrow?: boolean
   disable?: boolean
   border?: boolean
@@ -13,24 +13,23 @@ export type Props = {
 
   renderAction?: any
   children?: any
-}
+} & XcCommonProps
 
 const XcListItem = (props: Props) => {
   const { disable, onClick, border, borderColor, children, renderAction } = props
-  const [borderStyle, setBorderStyle] = useState<string | { [key: string]: any }>('')
 
-  const handleClick = useCallback(() => {
-    !disable && onClick && onClick()
-  }, [disable, onClick])
-
-  useEffect(() => {
-    setBorderStyle({
-      'border-color': borderColor
-    })
+  const borderStyle = useMemo(() => {
+    return {
+      borderColor: borderColor
+    }
   }, [borderColor])
 
+  const clickHandler = useCallback(() => {
+    !disable && isFunction(onClick) && onClick!()
+  }, [disable, onClick])
+
   return (
-    <View className='xc-list-item' onClick={handleClick}>
+    <View className='xc-list-item' onClick={clickHandler}>
       <View className='xc-list-item__wrap'>
         <View className='xc-list-item__content'>{children}</View>
         <View className='xc-list-item__actions'>{renderAction}</View>

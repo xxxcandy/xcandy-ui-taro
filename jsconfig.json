@@ -4,7 +4,8 @@
     "paths": {
       "@components/*": ["./src/components/*"],
       "@xcComponents/*": ["./src/xcComponents/*"],
-      "@myComponents/*": ["./src/myComponents/*"]
+      "@myComponents/*": ["./src/myComponents/*"],
+      "@utils/*": ["./src/utils/*"]
     }
   }
 }

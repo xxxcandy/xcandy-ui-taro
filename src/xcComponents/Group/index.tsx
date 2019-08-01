@@ -1,6 +1,8 @@
-import Taro, { useState, useEffect } from '@tarojs/taro'
+import Taro, { useCallback } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import classnames from 'classnames'
+
+import { isFunction } from '@utils/utils'
 
 import './index.scss'
 
@@ -8,22 +10,25 @@ export type Props = {
   leftIndent?: boolean
   rightIndent?: boolean
   children?: any
-}
+} & XcCommonProps
 
 const XcGroup = (props: Props) => {
-  const { leftIndent, rightIndent } = props
-  const [groupClassnames, setGroupClassnames] = useState('xc-group')
+  const { leftIndent, rightIndent, onClick, children } = props
 
-  useEffect(() => {
-    setGroupClassnames(
-      classnames('xc-group', {
-        'xc-group--indent-left': leftIndent,
-        'xc-group--indent-right': rightIndent
-      })
-    )
-  }, [leftIndent, rightIndent])
+  const groupClassnames = classnames('xc-group', {
+    'xc-group--indent-left': leftIndent,
+    'xc-group--indent-right': rightIndent
+  })
 
-  return <View className={groupClassnames}>{props.children}</View>
+  const clickHandler = useCallback(() => {
+    isFunction(onClick) && onClick!()
+  }, [onClick])
+
+  return (
+    <View className={groupClassnames} onClick={clickHandler}>
+      {children}
+    </View>
+  )
 }
 
 export default XcGroup

@@ -27,7 +27,8 @@ const config = {
   alias: {
     '@components': path.resolve(__dirname, '..', 'src/components'),
     '@xcComponents': path.resolve(__dirname, '..', 'src/xcComponents'),
-    '@myComponents': path.resolve(__dirname, '..', 'src/myComponents')
+    '@myComponents': path.resolve(__dirname, '..', 'src/myComponents'),
+    '@utils': path.resolve(__dirname,'..','src/utils')
   },
   weapp: {
     module: {
