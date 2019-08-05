@@ -7,16 +7,16 @@ import XcDrawer from '@xcComponents/Drawer'
 import './index.scss'
 
 class DrawerPage extends Component {
-  config: Taro.Config = {
-    navigationBarTitleText: 'Drawer 抽屉'
-  }
-
   state = {
     showDrawer1: false,
     placement1: 'bottom',
     showDrawer2: false,
     placement2: 'right',
     showDrawer3: false
+  }
+
+  config: Taro.Config = {
+    navigationBarTitleText: 'Drawer 抽屉'
   }
 
   drawerSwitch1 = (placement?: 'top' | 'bottom') => {

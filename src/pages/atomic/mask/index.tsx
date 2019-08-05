@@ -7,13 +7,13 @@ import Card from '@components/Card'
 import './index.scss'
 
 class MaskPage extends Taro.Component {
-  config: Taro.Config = {
-    navigationBarTitleText: '遮罩 Mask'
-  }
-
   state = {
     show1: false,
     show2: false
+  }
+
+  config: Taro.Config = {
+    navigationBarTitleText: '遮罩 Mask'
   }
 
   maskSwitch1 = () => {

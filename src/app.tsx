@@ -25,8 +25,6 @@ class App extends Component {
     }
   }
 
-  componentDidMount () {}
-
   componentDidShow () {}
 
   componentDidHide () {}

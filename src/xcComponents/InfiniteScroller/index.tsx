@@ -1,11 +1,16 @@
 import Taro, { useState, useEffect, useCallback } from '@tarojs/taro'
 import { View, ScrollView, Block } from '@tarojs/components'
 
-type FetchWrap = (fetch: (...arg: any[]) => Promise<any[] | undefined | null>) => void
+import './index.scss'
+
+type FetchDelegate = (fetch: (...arg: any[]) => Promise<any[] | undefined | null>) => void
+
 export type Props = {
   height: string
-  onFetch: (fetchWrap: FetchWrap) => any
-
+  onFetch: (fetchDelegate: FetchDelegate, page: number) => any
+  threshold?: number
+  disabled?: Boolean
+  once?: Boolean
   children?: any
   renderInitLoading?: any
   renderInitLoadingError?: any
@@ -19,6 +24,9 @@ const InfiniteScroller = (props: Props) => {
   const {
     height,
     onFetch,
+    threshold,
+    disabled,
+    once,
     children,
     renderNothing,
     renderInitLoading,
@@ -32,21 +40,21 @@ const InfiniteScroller = (props: Props) => {
   const [moreLoadingStatus, setMoreLoadingStatus] = useState<-1 | 0 | 1>(1) // -1 加载失败，0加载中，1加载成功
   const [nothing, setNothing] = useState<Boolean>(false)
   const [end, setEnd] = useState<Boolean>(false)
+  const [page, setPage] = useState<number>(1)
 
   const fetchData = useCallback(async () => {
     if (initStatus === 0 || moreLoadingStatus === 0 || end) return
-    console.log('end', end, 'init', initStatus, 'loading', moreLoadingStatus)
-
     if (initStatus !== 1) {
       setInitStatus(0)
     } else {
       setMoreLoadingStatus(0)
     }
-    async function fetchWrap(fetch) {
+    async function fetchDelegate(fetch) {
       // TODO:
       // ! 这里有问题,如何拿到最新的initStatus等值
       try {
         const data = await fetch()
+        setPage(page + 1)
         if (initStatus !== 1) {
           setInitStatus(1)
           setNothing(!data || data.length === 0)
@@ -55,6 +63,7 @@ const InfiniteScroller = (props: Props) => {
           setEnd(!data || data.length === 0)
         }
       } catch (e) {
+        console.error(e)
         if (initStatus !== 1) {
           setInitStatus(-1)
         } else {
@@ -62,39 +71,68 @@ const InfiniteScroller = (props: Props) => {
         }
       }
     }
-    onFetch(fetchWrap)
-  }, [onFetch, initStatus, moreLoadingStatus, end])
+    onFetch(fetchDelegate, page)
+  }, [onFetch, initStatus, moreLoadingStatus, end, page])
 
   const handleScrollToLower = useCallback(() => {
+    if (once) return
+    if (disabled) return
+
     fetchData()
-  }, [fetchData])
+  }, [disabled, fetchData, once])
 
   useEffect(() => {
+    if (initStatus !== null || disabled) return
     fetchData()
-  }, [])
+  }, [initStatus, disabled, fetchData])
 
   return (
-    <ScrollView onScrollToLower={handleScrollToLower} style={{ height }} scrollY>
+    <ScrollView
+      className='xc-infinite-scroller'
+      onScrollToLower={handleScrollToLower}
+      style={{ height }}
+      scrollY
+      lowerThreshold={threshold}
+    >
       {children}
-
-      {initStatus === 0 && <View>{renderInitLoading}</View>}
-      {initStatus === -1 && <View onClick={fetchData}>{renderInitLoadingError}</View>}
-      {initStatus === 1 &&
-        (nothing ? (
-          <View> {renderNothing}</View>
-        ) : end ? (
-          <Block>{renderEnd}</Block>
-        ) : (
-          <Block>
-            {moreLoadingStatus === -1 ? (
-              <View onClick={fetchData}>{renderMoreLoadingError}</View>
+      {!disabled && (
+        <Block>
+          {initStatus === 0 && <View>{renderInitLoading}</View>}
+          {initStatus === -1 && <View onClick={fetchData}>{renderInitLoadingError}</View>}
+          {initStatus === 1 &&
+            (nothing ? (
+              <View> {renderNothing}</View>
             ) : (
-              <View>{renderMoreLoading}</View>
-            )}
-          </Block>
-        ))}
+              !once &&
+              (end ? (
+                <Block>{renderEnd}</Block>
+              ) : (
+                <Block>
+                  {/* 第一屏(第一屏page为1-2)不触发 update 时不展示loading，后续 loading 可以一直展示 */}
+                  {page > 2 ? (
+                    moreLoadingStatus === -1 ? (
+                      <View onClick={fetchData}>{renderMoreLoadingError}</View>
+                    ) : (
+                      <View>{renderMoreLoading}</View>
+                    )
+                  ) : (
+                    <Block>
+                      {moreLoadingStatus === -1 && <View onClick={fetchData}>{renderMoreLoadingError}</View>}
+                      {moreLoadingStatus === 0 && <View>{renderMoreLoading}</View>}
+                    </Block>
+                  )}
+                </Block>
+              ))
+            ))}
+        </Block>
+      )}
     </ScrollView>
   )
+}
+
+InfiniteScroller.defaultProps = {
+  disabled: false,
+  threshold: 50
 }
 
 export default InfiniteScroller
