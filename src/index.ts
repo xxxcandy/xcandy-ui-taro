@@ -1,14 +1,14 @@
 /* atomic */
-export { default as XcMask } from './xcComponents/Mask'
+export { default as XcMask } from '@xcComponents/Mask'
 
 /* layout */
-export { default as XcGroup } from './xcComponents/Group'
-export { default as XcListItem } from './xcComponents/ListItem'
-export { default as XcArrow } from './xcComponents/Arrow'
+export { default as XcGroup } from '@xcComponents/Group'
+export { default as XcListItem } from '@xcComponents/ListItem'
+export { default as XcArrow } from '@xcComponents/Arrow'
 
 /* action */
-export { default as XcInfiniteScroller } from './xcComponents/InfiniteScroller'
-export { default as XcDrawer } from './xcComponents/Drawer'
+export { default as XcInfiniteScroller } from '@xcComponents/InfiniteScroller'
+export { default as XcDrawer } from '@xcComponents/Drawer'
 
 /* other */
-export { default as XcCalendar } from './xcComponents/Calendar'
+export { default as XcCalendar } from '@xcComponents/Calendar'
