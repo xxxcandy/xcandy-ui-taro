@@ -1,7 +1,7 @@
-export function isFunction(o) {
+export function isFunction (o) {
   return typeof o === 'function'
 }
 
-export function isNumber(o) {
+export function isNumber (o) {
   return typeof o === 'number'
 }

@@ -66,7 +66,7 @@ export default class Index extends Component {
     })
   }
 
-  render() {
+  render () {
     return (
       <View className='page page-home'>
         <View className='header'>XCandy-Taro-UI</View>

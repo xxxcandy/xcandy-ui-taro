@@ -5,7 +5,7 @@ import './index.scss'
 
 type FetchDelegate = (fetch: (...arg: any[]) => Promise<any[] | undefined | null>) => void
 
-export type Props = {
+export interface Props {
   height: string
   onFetch: (fetchDelegate: FetchDelegate, page: number) => any
   threshold?: number
@@ -20,7 +20,7 @@ export type Props = {
   renderEnd?: any
 }
 
-const InfiniteScroller = (props: Props) => {
+const InfiniteScroller: Taro.FC<Props> = (props: Props) => {
   const {
     height,
     onFetch,
@@ -42,14 +42,14 @@ const InfiniteScroller = (props: Props) => {
   const [end, setEnd] = useState<Boolean>(false)
   const [page, setPage] = useState<number>(1)
 
-  const fetchData = useCallback(async () => {
+  const fetchData = useCallback(() => {
     if (initStatus === 0 || moreLoadingStatus === 0 || end) return
     if (initStatus !== 1) {
       setInitStatus(0)
     } else {
       setMoreLoadingStatus(0)
     }
-    async function fetchDelegate(fetch) {
+    async function fetchDelegate (fetch): Promise<any> {
       // TODO:
       // ! 这里有问题,如何拿到最新的initStatus等值
       try {

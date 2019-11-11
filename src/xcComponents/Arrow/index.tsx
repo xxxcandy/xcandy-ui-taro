@@ -26,7 +26,7 @@ const XcArrow = (props: Props) => {
 
   const trans = useMemo(() => {
     return computeTransform.compute({ degree, offsetDegree })
-  }, [degree, offsetDegree,computeTransform])
+  }, [degree, offsetDegree, computeTransform])
 
   const clickHandler = useCallback(() => {
     isFunction(onClick) && onClick!()

@@ -1,10 +1,8 @@
 {
-  "extends": ["taro"],
-  "rules": {
-    "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": ["on", { "argsIgnorePattern": "^_", "varsIgnorePattern": "Taro" }],
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".tsx"] }]
-  },
+  "extends": ["taro","standard"],
+  "plugins": [
+    "@typescript-eslint"
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
@@ -12,5 +10,19 @@
     },
     "useJSXTextNode": true,
     "project": "./tsconfig.json"
+  },
+  "rules": {
+    "no-unused-vars": "off",
+    "no-console": "off",
+    "lines-between-class-members": "error",
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".tsx"] }],
+    "import/prefer-default-export": "warn"
+  },
+  "globals": {
+    "tt": true,
+    "swan": true,
+    "alipay": true,
+    "qq": true,
+    "wx": true
   }
 }

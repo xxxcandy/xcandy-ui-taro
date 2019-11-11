@@ -7,7 +7,7 @@ import XcArrow from '@xcComponents/Arrow'
 import Card from '@components/Card'
 
 class ListPage extends Component {
-  render() {
+  render () {
     return (
       <View className='page'>
         <Card title='基础'>

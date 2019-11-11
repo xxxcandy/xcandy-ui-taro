@@ -30,7 +30,7 @@ class MaskPage extends Taro.Component {
     })
   }
 
-  render() {
+  render () {
     const { show1, show2 } = this.state
     return (
       <View className='page mask-page'>

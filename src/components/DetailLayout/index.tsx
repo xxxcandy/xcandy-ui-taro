@@ -6,7 +6,7 @@ import './index.scss'
 const DetialLayout = props => {
   const { children, docsLink } = props
 
-  function gotoDocs() {
+  function gotoDocs () {
     if (process.env.TARO_NEV === 'h5' && docsLink) {
       window.location.href = docsLink
     }

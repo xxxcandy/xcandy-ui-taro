@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import { View } from '@tarojs/components'
 import XcArrow from '../Arrow'
 
-import { computePreMonthRenderArr, computeCurrenMonthRenderArr, computeNexMonthRenderArr } from './utils'
+import { computePreMonthRenderArr, computeCurrentMonthRenderArr, computeNexMonthRenderArr } from './utils'
 
 import { DateRender } from './interface'
 import DateRenderPro from './DateRenderPro'
@@ -74,7 +74,7 @@ class XcCalendar extends PureComponent<IProps, IState> {
     currentMonthRenderArrPro: []
   }
 
-  componentDidMount() {
+  componentDidMount () {
     const { currentDate } = this.props
     if (currentDate) {
       this.setState(
@@ -88,7 +88,7 @@ class XcCalendar extends PureComponent<IProps, IState> {
     }
   }
 
-  componentWillReceiveProps(nextProps: Props) {
+  componentWillReceiveProps (nextProps: Props) {
     const { currentDate, onDateHooks } = this.props
     if (currentDate !== nextProps.currentDate || onDateHooks !== nextProps.onDateHooks) {
       this.setState({ dateRender: dayjs(nextProps.currentDate) }, this.genNewMonth)
@@ -103,7 +103,7 @@ class XcCalendar extends PureComponent<IProps, IState> {
     let isEndMonth = false
     const renderDateMonthStart = dateRender.startOf('month')
     const preMonthRenderArr = computePreMonthRenderArr(dateRender)
-    const currentMonthRenderArr = computeCurrenMonthRenderArr(dateRender)
+    const currentMonthRenderArr = computeCurrentMonthRenderArr(dateRender)
     const nextMonthRenderArr = this.props.currentMonthOnly ? [] : computeNexMonthRenderArr(dateRender)
 
     start &&
@@ -184,7 +184,7 @@ class XcCalendar extends PureComponent<IProps, IState> {
     return renderDatePro
   }
 
-  render() {
+  render () {
     const { themColor, currentMonthOnly } = this.props
     const { dateRender, isStartMonth, isEndMonth } = this.state
     const renderYear = dateRender.year()

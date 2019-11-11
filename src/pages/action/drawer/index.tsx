@@ -42,7 +42,7 @@ class DrawerPage extends Component {
     })
   }
 
-  render() {
+  render () {
     const { showDrawer1, placement1, showDrawer2, placement2, showDrawer3 } = this.state
     return (
       <View className='page'>
